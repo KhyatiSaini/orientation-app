@@ -6,6 +6,7 @@ class NetworkHelper {
   String url;
 
   Future<dynamic> GET() async {
+    // Function to place get request and get body and status code
     http.Response response = await http.get(url);
     Map resp;
     var body = jsonDecode(response.body.toString());

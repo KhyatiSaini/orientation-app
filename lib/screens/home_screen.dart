@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../widgets/appbar.dart';
-import '../utilities/location.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,16 +8,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  // ignore: must_call_super
-  void initState() {
-    getLocation();
-  }
 
-  void getLocation() async {
-    Location location = new Location();
-    var data = await location.getLocationLowAccuracy();
-    print(data);
-  }
 
   @override
   Widget build(BuildContext context) {
