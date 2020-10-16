@@ -8,27 +8,27 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbar,
       // navigation drawer
       drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text('Username'),
-              accountEmail: Text('username@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text('U',
-                style: TextStyle(
-                  fontSize: 40.0,
-                )),
-              ),
+        child: Column(children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text('Username'),
+            accountEmail: Text('username@gmail.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Text('U',
+                  style: TextStyle(
+                    fontSize: 40.0,
+                  )),
             ),
-            // listview widget
-          ]
-        ),
+          ),
+        ]),
       ),
       body: Container(),
       floatingActionButton: FloatingActionButton(
