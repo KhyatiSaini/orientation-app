@@ -7,13 +7,15 @@ class signIn extends StatefulWidget {
 }
 
 class _signInState extends State<signIn> {
+  bool showPass = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff0073e1),
       body: SingleChildScrollView(
         child: Container(
-          height:MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -71,10 +73,12 @@ class _signInState extends State<signIn> {
                           Expanded(
                               child: Align(
                                   alignment: Alignment.topLeft,
-                                  child: Text("Hello there, sign in to continue!",
+                                  child: Text(
+                                      "Hello there, sign in to continue!",
                                       style: TextStyle(
                                           color: Colors.black45,
-                                          fontWeight: FontWeight.w500, fontSize: 16)))),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16)))),
                           SizedBox(
                             height: 10,
                           ),
@@ -109,8 +113,8 @@ class _signInState extends State<signIn> {
                                           bottomRight: Radius.circular(20),
                                           topRight: Radius.circular(5),
                                           bottomLeft: Radius.circular(5)),
-                                      borderSide:
-                                          new BorderSide(color: Colors.black54)),
+                                      borderSide: new BorderSide(
+                                          color: Colors.black54)),
                                   prefixIcon: Icon(
                                     Icons.email,
                                     color: Colors.black,
@@ -150,21 +154,36 @@ class _signInState extends State<signIn> {
                                           bottomRight: Radius.circular(20),
                                           topRight: Radius.circular(5),
                                           bottomLeft: Radius.circular(5)),
-                                      borderSide:
-                                          new BorderSide(color: Colors.black54)),
+                                      borderSide: new BorderSide(
+                                          color: Colors.black54)),
                                   prefixIcon: Icon(
                                     Icons.https,
                                     color: Colors.black,
                                   ),
-                                  suffixIcon: Icon(
-                                    Icons.visibility,
-                                    color: Colors.black,
+                                  suffixIcon: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        showPass = !showPass;
+                                      });
+                                    },
+                                    child: showPass
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: Colors.black,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.black,
+                                          ),
                                   ),
                                   hintStyle: TextStyle(color: Colors.black),
                                   hintText: "********"),
+                              obscureText: showPass,
                             ),
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Expanded(
                               child: FlatButton(
                             onPressed: () {
