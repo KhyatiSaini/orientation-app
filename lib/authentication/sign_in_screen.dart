@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'sign_in_screen.dart';
-
-class SignUp extends StatefulWidget {
-  static String route = "/sign-up";
+import 'sign_up_screen.dart';
+// ignore: camel_case_types
+class signIn extends StatefulWidget {
+  static String route = "/sign-in";
 
   @override
-  _SignUpPage createState() => _SignUpPage();
+  _signInState createState() => _signInState();
 }
 
-class _SignUpPage extends State<SignUp> {
+class _signInState extends State<signIn> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
-  final userNameController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
   String email, username, pwd, confirm_pwd;
 
   bool _secureText = true;
@@ -40,7 +38,6 @@ class _SignUpPage extends State<SignUp> {
               child: Container(
                   padding: null,
                   margin: null,
-                  // height: MediaQuery.of(context).size.height,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -68,7 +65,7 @@ class _SignUpPage extends State<SignUp> {
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 85, left: 20),
-                            child: Text('Sign Up',
+                            child: Text('Sign In',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 28,
@@ -90,7 +87,7 @@ class _SignUpPage extends State<SignUp> {
                                   Container(
                                     padding: EdgeInsets.only(left: 20, top: 30),
                                     child: Text(
-                                      'Welcome to something',
+                                      'Welcome back',
                                       style: TextStyle(
                                           color: Colors.blue,
                                           fontWeight: FontWeight.bold,
@@ -131,10 +128,10 @@ class _SignUpPage extends State<SignUp> {
                                                 vertical: 0, horizontal: 15),
                                             child: TextFormField(
                                               enableSuggestions: true,
-                                              textInputAction: TextInputAction.next,
                                               keyboardType:
                                                   TextInputType.emailAddress,
                                               controller: emailController,
+                                              textInputAction: TextInputAction.next,
                                               validator: (input) => emailValidator(
                                                       input)
                                                   ? null
@@ -177,67 +174,7 @@ class _SignUpPage extends State<SignUp> {
                                                       .withOpacity(0.7),
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 15),
-                                            ),
-                                          ),
-                                          SizedBox(height: 10),
-                                          Container(
-                                            padding: EdgeInsets.only(left: 20),
-                                            child: Text(
-                                              'Username',
-                                              style: TextStyle(
-                                                  color: Colors.grey[400],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                          SizedBox(height: 10),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 0, horizontal: 15),
-                                            child: TextFormField(
-                                              enableSuggestions: true,
-                                              textInputAction: TextInputAction.next,
-                                              keyboardType: TextInputType.text,
-                                              controller: userNameController,
-                                              onChanged: (input) {
-                                                username = input;
-                                              },
-                                              decoration: InputDecoration(
-                                                fillColor: Colors.grey[200],
-                                                filled: true,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20)),
-                                                  borderSide: new BorderSide(
-                                                      width: 2,
-                                                      color: Colors.grey[200]),
-                                                ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20)),
-                                                  borderSide: new BorderSide(
-                                                      width: 2,
-                                                      color: Colors.grey[200]),
-                                                ),
-                                                prefixIcon: Icon(
-                                                  Icons.account_circle,
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                ),
-                                                hintStyle: TextStyle(
-                                                    color: Colors.grey),
-                                                hintText: "Enter your username",
-                                              ),
-                                              style: TextStyle(
-                                                  color: Colors.black
-                                                      .withOpacity(0.7),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15),
-                                            ),
+                                            )
                                           ),
                                           SizedBox(height: 10),
                                           Container(
@@ -254,9 +191,9 @@ class _SignUpPage extends State<SignUp> {
                                           Container(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 0, horizontal: 15),
+
                                             child: TextFormField(
                                               controller: passwordController,
-                                              textInputAction: TextInputAction.next,
                                               onChanged: (input) {
                                                 pwd = input;
                                               },
@@ -320,90 +257,6 @@ class _SignUpPage extends State<SignUp> {
                                             ),
                                           ),
                                           SizedBox(height: 10),
-                                          Container(
-                                            padding: EdgeInsets.only(left: 20),
-                                            child: Text(
-                                              'Confirm Password',
-                                              style: TextStyle(
-                                                  color: Colors.grey[400],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                          SizedBox(height: 10),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 0, horizontal: 15),
-                                            child: TextFormField(
-                                              
-                                              controller:
-                                                  confirmPasswordController,
-                                              onChanged: (input) {
-                                                confirm_pwd = input;
-                                              },
-                                              validator: (input) {
-                                                if (input.length < 6) {
-                                                  return "Password too short";
-                                                } else if (pwd != confirm_pwd) {
-                                                  return "Passwords do not match";
-                                                }
-                                                return null;
-                                              },
-                                              decoration: InputDecoration(
-                                                fillColor: Colors.grey[200],
-                                                filled: true,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20)),
-                                                  borderSide: new BorderSide(
-                                                      width: 2,
-                                                      color: Colors.grey[200]),
-                                                ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20)),
-                                                  borderSide: new BorderSide(
-                                                      width: 2,
-                                                      color: Colors.grey[200]),
-                                                ),
-                                                prefixIcon: Icon(
-                                                  Icons.https,
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                ),
-                                                suffixIcon: FlatButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      toggle();
-                                                    });
-                                                  },
-                                                  child: _secureText
-                                                      ? Icon(
-                                                          Icons.visibility_off,
-                                                          color: Colors.grey
-                                                              .withOpacity(0.5))
-                                                      : Icon(
-                                                          Icons.remove_red_eye,
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.5)),
-                                                ),
-                                                hintStyle: TextStyle(
-                                                    color: Colors.grey),
-                                                hintText: "Confirm Password",
-                                              ),
-                                              obscureText: _secureText,
-                                              style: TextStyle(
-                                                  color: Colors.black
-                                                      .withOpacity(0.7),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15),
-                                            ),
-                                          ),
                                           SizedBox(height: 60),
                                           Container(
                                             padding: EdgeInsets.symmetric(
@@ -444,11 +297,11 @@ class _SignUpPage extends State<SignUp> {
                                                 GestureDetector(
                                                   onTap: () {
                                                     Navigator.pushNamed(
-                                                        context, signIn.route);
+                                                        context, SignUp.route);
                                                   },
                                                   child: Material(
                                                     color: Colors.white,
-                                                    child: Text('Sign In',
+                                                    child: Text('Sign Up',
                                                         style: TextStyle(
                                                             color: Colors.blue,
                                                             fontWeight:

@@ -4,6 +4,8 @@ import 'home_screen.dart';
 import '../utilities/location.dart';
 
 class SplashScreen extends StatefulWidget {
+  static String route = "/splash-screen";
+
   @override
   _Splash_State createState() => _Splash_State();
 }

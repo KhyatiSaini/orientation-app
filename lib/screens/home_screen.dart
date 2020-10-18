@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import '../widgets/appbar.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String route = "/home-screen";
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-
 
   @override
   Widget build(BuildContext context) {
