@@ -335,7 +335,7 @@ class _SignUpPage extends State<SignUp> {
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 0, horizontal: 15),
                                             child: TextFormField(
-                                              
+
                                               controller:
                                                   confirmPasswordController,
                                               onChanged: (input) {
