@@ -12,9 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      home: HomeScreen(),
       title: 'Pyschic Fresher',
-      theme: ThemeData.dark(),
+      // theme: ThemeData.dark(),
       routes: {
         WelcomeScreen.route: (context) => WelcomeScreen(),
         SignUp.route: (context) => SignUp(),

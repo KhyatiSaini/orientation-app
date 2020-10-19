@@ -4,12 +4,12 @@ import '../widgets/appbar.dart';
 
 class HomeScreen extends StatefulWidget {
   static String route = "/home-screen";
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: AppDrawer(),
       body: Container(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: FittedBox(child: Icon(Icons.camera_alt)),
       ),
     );
   }
