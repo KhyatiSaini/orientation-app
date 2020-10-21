@@ -1,0 +1,32 @@
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
+import 'package:orientation_app/classes/hostel.dart';
+import 'package:orientation_app/utilities/constants.dart';
+
+class Hostels extends ChangeNotifier {
+  List<Hostel> _hostels = [];
+
+  List<Hostel> get hostels => _hostels;
+
+  Future<void> fetchAndSetHostels() async {
+    try {
+      final String url = baseUrl + "hostels/";
+      Response response = await get(url);
+      List data = json.decode(response.body);
+      print(data);
+      if (response.statusCode == 200) {
+        for (int i = 0; i <= data.length; i++) {
+          _hostels.add(Hostel(
+            id: data[i]["id"],
+            hostelName: data[i]["hostelName"],
+            imageUrl: data[i]["imageUrl"],
+            description: data[i]["description"]
+          ));
+        }
+      } else {
+        throw Exception("Invalid Status");
+      }
+    } catch (e) {}
+  }
+}
