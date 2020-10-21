@@ -11,22 +11,27 @@ class Hostels extends ChangeNotifier {
 
   Future<void> fetchAndSetHostels() async {
     try {
-      final String url = baseUrl + "hostels/";
+      final String url = baseUrl + "/hostels/?format=json";
+      print(url);
       Response response = await get(url);
       List data = json.decode(response.body);
       print(data);
+      _hostels = [];
       if (response.statusCode == 200) {
-        for (int i = 0; i <= data.length; i++) {
+        for (int i = 0; i < data.length; i++) {
           _hostels.add(Hostel(
             id: data[i]["id"],
-            hostelName: data[i]["hostelName"],
+            hostelName: data[i]["HostelName"],
             imageUrl: data[i]["imageUrl"],
             description: data[i]["description"]
           ));
         }
+        notifyListeners();
       } else {
         throw Exception("Invalid Status");
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 }

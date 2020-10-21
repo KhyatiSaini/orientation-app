@@ -23,7 +23,9 @@ class _HostelDetailCardState extends State<HostelDetailCard> {
         child: Column(
           children: [
             ListTile(
-              leading: CircleAvatar(),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(widget.imageUrl),
+              ),
               title: Text(widget.title),
               trailing: IconButton(
                 icon:
@@ -45,7 +47,10 @@ class _HostelDetailCardState extends State<HostelDetailCard> {
                         color: Colors.black,
                         child: Text(
                           "Description",
-                          style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400),
                         )),
                     Center(
                       child: Text(widget.description),
