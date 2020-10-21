@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../screens/hostels_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w400);
+    final style = TextStyle(
+        color: Colors.black, fontSize: 20, fontWeight: FontWeight.w400);
 
     return Drawer(
         child: ListView(children: [
@@ -84,7 +86,9 @@ class AppDrawer extends StatelessWidget {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, HostelsList.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.apartment)),
         title: Text(
           "Hostels",
