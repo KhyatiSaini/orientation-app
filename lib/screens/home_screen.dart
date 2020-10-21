@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:orientation_app/widgets/Drawer.dart';
 import '../widgets/appbar.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String route = "/home-screen";
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -12,27 +15,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: appbar,
       // navigation drawer
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text('Username'),
-              accountEmail: Text('username@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Text('U',
-                style: TextStyle(
-                  fontSize: 40.0,
-                )),
-              ),
-            ),
-            // listview widget
-          ]
-        ),
-      ),
+      drawer: AppDrawer(),
       body: Container(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: FittedBox(child: Icon(Icons.camera_alt)),
       ),
     );
   }
