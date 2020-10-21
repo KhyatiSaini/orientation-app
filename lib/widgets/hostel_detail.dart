@@ -41,21 +41,23 @@ class _HostelDetailCardState extends State<HostelDetailCard> {
               Container(
                 width: double.infinity,
                 height: 100,
-                child: Column(
-                  children: [
-                    Title(
-                        color: Colors.black,
-                        child: Text(
-                          "Description",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400),
-                        )),
-                    Center(
-                      child: Text(widget.description),
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Title(
+                          color: Colors.black,
+                          child: Text(
+                            "Description",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400),
+                          )),
+                      Center(
+                        child: Text(widget.description),
+                      ),
+                    ],
+                  ),
                 ),
               )
           ],

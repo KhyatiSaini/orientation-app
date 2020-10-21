@@ -15,16 +15,14 @@ class Hostels extends ChangeNotifier {
       print(url);
       Response response = await get(url);
       List data = json.decode(response.body);
-      print(data);
       _hostels = [];
       if (response.statusCode == 200) {
         for (int i = 0; i < data.length; i++) {
           _hostels.add(Hostel(
-            id: data[i]["id"],
-            hostelName: data[i]["HostelName"],
-            imageUrl: data[i]["imageUrl"],
-            description: data[i]["description"]
-          ));
+              id: data[i]["id"],
+              hostelName: data[i]["HostelName"],
+              imageUrl: data[i]["imageUrl"],
+              description: data[i]["description"]));
         }
         notifyListeners();
       } else {
@@ -32,6 +30,7 @@ class Hostels extends ChangeNotifier {
       }
     } catch (e) {
       print(e);
+      throw Exception();
     }
   }
 }
