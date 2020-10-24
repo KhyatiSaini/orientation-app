@@ -6,6 +6,7 @@ import 'screens/home_screen.dart';
 import 'screens/hostels_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/hostels.dart';
+import 'screens/college_map_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (_) => Hostels())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: NithMapScreen(),
         title: 'Pyschic Fresher',
         // theme: ThemeData.dark(),
         routes: {
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
           SignUp.route: (context) => SignUp(),
           signIn.route: (context) => signIn(),
           HomeScreen.route: (context) => HomeScreen(),
-          HostelsList.route: (context) => HostelsList()
+          HostelsList.route: (context) => HostelsList(),
+          NithMapScreen.route: (context) => NithMapScreen()
         },
       ),
     );
