@@ -7,6 +7,7 @@ import 'screens/hostels_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/hostels.dart';
 import 'screens/college_map_screen.dart';
+import 'screens/location_screen.dart';
 
 void main() {
   runApp(MyApp());
