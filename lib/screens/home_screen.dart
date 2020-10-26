@@ -8,12 +8,13 @@ import '../widgets/appbar.dart';
 
 class HomeScreen extends StatefulWidget {
   static String route = "/home-screen";
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
+
   String username = " ";
   String email = " ";
   int _currentIndex = 0;
@@ -33,15 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void setDetails() async {
     var details = await FirebaseAuth.instance.currentUser;
-    print(details.displayName);
+    var name = details.displayName;
     setState(() {
       email = details.email;
-      username = details.displayName;
+      username = name == null ? " " : name;
     });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key,
       appBar: appbar,
       backgroundColor: Colors.white,
       drawer: AppDrawer(email, username),

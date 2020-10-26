@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 Widget appbar = AppBar(
@@ -18,6 +19,17 @@ Widget appbar = AppBar(
             try{
               GoogleSignIn _googleSignIn = GoogleSignIn();
               await _googleSignIn.signOut();
+
+
+              Fluttertoast.showToast(
+                  msg: "Successfully Logged-Out",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.blue,
+                  fontSize: 16.0
+              );
             }
             catch(e){
               print(e);

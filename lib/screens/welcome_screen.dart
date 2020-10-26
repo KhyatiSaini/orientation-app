@@ -8,6 +8,7 @@ import '../authentication/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String route = "/welcome-screen";
@@ -38,6 +39,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       );
       final authResult = await _auth.signInWithCredential(credential);
       final user = authResult.user;
+      Fluttertoast.showToast(
+          msg: "Successfully Signed In",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.blue,
+          fontSize: 16.0
+      );
     } catch (e) {
       print("Error");
       setState(() {
@@ -108,7 +118,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   color: Colors.white,
                   onPressed: loginWithGoogle,
                   child: load
-                      ? SpinKitCircle(color: Colors.blue,)
+                      ? SpinKitCircle(
+                          color: Colors.blue,
+                        )
                       : Text(
                           'Sign in with Google',
                           style: TextStyle(
