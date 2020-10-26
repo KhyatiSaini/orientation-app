@@ -7,6 +7,7 @@ import '../authentication/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 class WelcomeScreen extends StatefulWidget {
   static String route = "/welcome-screen";
 
@@ -15,6 +16,30 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  Future<void> loginWithGoogle() async {
+    try {
+      final GoogleSignInAccount googleSignInAccount =
+          await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+
+      // ignore: deprecated_member_use
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      final authResult = await _auth.signInWithCredential(credential);
+      final user = authResult.user;
+      print(user);
+    } catch (e) {
+      print(e);
+      print("Error");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,7 +100,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: MaterialButton(
                   height: 48,
                   color: Colors.white,
-                  onPressed: () => print('sign-in with google'),
+                  onPressed: loginWithGoogle,
                   child: Text(
                     'Sign in with Google',
                     style: TextStyle(

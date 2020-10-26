@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1097280651621-ohdl63gnion0r1g5qkh4u87g5ous2odo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.orientation_app",
+            "certificate_hash": "0a59159d9df8a4468f00bd974a9cc6001c58d768"
+          }
+        },
+        {
           "client_id": "1097280651621-m9o43jd12t5m4fo2o8cdnb69ubn03n71.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "1097280651621-m9o43jd12t5m4fo2o8cdnb69ubn03n71.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1097280651621-nav69uqjk3vjntirgpbj9b6kvcnhd1c5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.orientationApp"
+              }
             }
           ]
         }
