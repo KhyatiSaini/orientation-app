@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Signin.dart';
 import 'sign_in_screen.dart';
 
 class SignUp extends StatefulWidget {
@@ -444,7 +445,7 @@ class _SignUpPage extends State<SignUp> {
                                                 GestureDetector(
                                                   onTap: () {
                                                     Navigator.pushNamed(
-                                                        context, signIn.route);
+                                                        context, SignIn.route);
                                                   },
                                                   child: Material(
                                                     color: Colors.white,

@@ -3,14 +3,8 @@ import 'package:orientation_app/widgets/BottomNavigationBar.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
 import '../widgets/appbar.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   static String route = "/home-screen";
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -23,3 +17,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
