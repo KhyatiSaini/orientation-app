@@ -31,11 +31,8 @@ class _NithMapScreenState extends State<NithMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("NIT Hamirpur Map"),
-        ),
-        body: Stack(children: [
+    return Container(
+        child: Stack(children: [
           Container(
             height: double.infinity,
             width: double.infinity,
