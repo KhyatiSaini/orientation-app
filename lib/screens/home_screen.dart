@@ -4,7 +4,7 @@ import 'package:orientation_app/screens/college_map_screen.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
 import '../widgets/appbar.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   static String route = "/home-screen";
 
   @override
@@ -20,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Container()
   ];
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbar,
@@ -51,3 +50,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

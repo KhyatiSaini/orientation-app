@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:orientation_app/authentication/Signin.dart';
 import '../authentication/sign_up_screen.dart';
 import '../authentication/sign_in_screen.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 class WelcomeScreen extends StatefulWidget {
   static String route = "/welcome-screen";
 
@@ -120,7 +123,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, signIn.route);
+                        Navigator.pushNamed(context, SignIn.route);
                       },
                       child: Material(
                         color: Colors.blue,
