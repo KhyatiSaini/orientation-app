@@ -4,7 +4,7 @@ import 'package:orientation_app/screens/college_map_screen.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
 import '../widgets/appbar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static String route = "/home-screen";
 
   @override
@@ -50,4 +50,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
