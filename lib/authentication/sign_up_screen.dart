@@ -48,12 +48,7 @@ class _SignUpPage extends State<SignUp> {
         var resp = await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _email.trim(), password: _password.trim());
         // ignore: deprecated_member_use
-        await Firestore.instance.collection('user').add({
-          "id": resp.user.uid,
-          "email": _email.trim(),
-          "username": _username.trim(),
-          "created_at": Timestamp.now()
-        });
+        FirebaseAuth.instance.currentUser.updateProfile(displayName: _username);
         Navigator.of(context).pop();
       } catch (e) {
         print(e);
