@@ -2,7 +2,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:orientation_app/screens/college_map_screen.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
-import 'package:orientation_app/widgets/fragment.dart';
 import '../widgets/appbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +14,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-
+    Container(),
+    NithMapScreen(),
+    Container(),
+    Container()
   ];
 
   @override
@@ -24,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: appbar,
       backgroundColor: Colors.white,
       drawer: AppDrawer(),
-      body: Container(),
+      body: _children[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.blue,
         backgroundColor: Colors.transparent,

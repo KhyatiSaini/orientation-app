@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
-import '../widgets/fragment.dart';
 
 class bottomNavBar extends StatefulWidget {
   @override
