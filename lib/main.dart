@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (_) => Hostels())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: NithMapScreen(),
+        home: HomeScreen(),
         title: 'Pyschic Fresher',
         // theme: ThemeData.dark(),
         routes: {

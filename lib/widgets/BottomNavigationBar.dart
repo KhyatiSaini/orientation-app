@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import '../screens/home_screen.dart';
+import '../widgets/fragment.dart';
 
 class bottomNavBar extends StatefulWidget {
   @override
   _bottomNavBarState createState()=> _bottomNavBarState();
 }
 class _bottomNavBarState extends State<bottomNavBar> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [];
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -16,6 +26,8 @@ class _bottomNavBarState extends State<bottomNavBar> {
           )
       ),
       child: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: 0,
         backgroundColor: Colors.blueGrey,
         items: [
           BottomNavigationBarItem(
