@@ -14,6 +14,7 @@ dependencies:
 
 
   cupertino_icons: ^0.1.3
+  flutter_launcher_icons: ^0.8.1
   geolocator: ^6.0.0
   firebase_core: ^0.5.0+1
   firebase_auth: ^0.18.1+2
@@ -22,13 +23,22 @@ dependencies:
   provider: ^4.3.2+2
   flutter_spinkit: ^4.1.2+1
   google_maps_flutter: ^0.5.27+3
+  cloud_firestore: ^0.14.1+3
+
 
 
 
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.8.0"
+
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/circle-cropped.png"
 
 flutter:
   uses-material-design: true
