@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 Widget appbar = AppBar(
     title: Text("Psychic Fresher",
@@ -11,9 +12,17 @@ Widget appbar = AppBar(
           Icons.more_vert,
           color: Colors.white,
         ),
-        onChanged: (value) {
+        onChanged: (value) async {
           if (value == 'logout') {
             FirebaseAuth.instance.signOut();
+            try{
+              GoogleSignIn _googleSignIn = GoogleSignIn();
+              await _googleSignIn.signOut();
+            }
+            catch(e){
+              print(e);
+            }
+
           }
         },
         items: [

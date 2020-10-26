@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:orientation_app/authentication/Signin.dart';
 import '../authentication/sign_up_screen.dart';
 import '../authentication/sign_in_screen.dart';
@@ -18,9 +19,13 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  bool load = false;
 
   Future<void> loginWithGoogle() async {
     try {
+      setState(() {
+        load = true;
+      });
       final GoogleSignInAccount googleSignInAccount =
           await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
@@ -33,10 +38,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       );
       final authResult = await _auth.signInWithCredential(credential);
       final user = authResult.user;
-      print(user);
     } catch (e) {
-      print(e);
       print("Error");
+      setState(() {
+        load = false;
+      });
     }
   }
 
@@ -101,13 +107,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   height: 48,
                   color: Colors.white,
                   onPressed: loginWithGoogle,
-                  child: Text(
-                    'Sign in with Google',
-                    style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  child: load
+                      ? SpinKitCircle(color: Colors.blue,)
+                      : Text(
+                          'Sign in with Google',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold),
+                        ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(17.0),
                   ),
