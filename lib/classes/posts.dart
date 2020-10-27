@@ -7,7 +7,7 @@ class Post {
   String imageUrl;
   String userName;
   LatLng location;
-  Timestamp timestamp;
+  String timestamp;
 
   Post(
       {this.email,
