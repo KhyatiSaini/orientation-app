@@ -25,6 +25,15 @@ class _SignUpPage extends State<SignUp> {
   bool _secureText = true;
   bool isLoading = false;
 
+  @override
+  void dispose() {
+    // disposing all the controllers else they will lead to memory leaks
+    emailController.dispose();
+    userNameController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+  }
+
   void toggle() {
     setState(() {
       _secureText = !_secureText;
@@ -50,7 +59,8 @@ class _SignUpPage extends State<SignUp> {
             email: _email.trim(), password: _password.trim());
         // ignore: deprecated_member_use
         print(_username);
-        await FirebaseAuth.instance.currentUser.updateProfile(displayName: _username);
+        await FirebaseAuth.instance.currentUser
+            .updateProfile(displayName: _username);
         Fluttertoast.showToast(
             msg: "Successfully Signed Up & Logged-In",
             toastLength: Toast.LENGTH_SHORT,
@@ -58,8 +68,7 @@ class _SignUpPage extends State<SignUp> {
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.white,
             textColor: Colors.blue,
-            fontSize: 16.0
-        );
+            fontSize: 16.0);
         Navigator.of(context).pop();
       } catch (e) {
         print(e);

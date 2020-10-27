@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -73,14 +74,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 child: Container(
                     child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: colors[Random().nextInt(20)],
+                    backgroundColor: colors[Random().nextInt(19)],
                     maxRadius: 25,
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: FittedBox(
                         child: Text(
                           UserIcon(),
-                          style: TextStyle(fontSize: 40.0, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 40.0, color: Colors.white),
                         ),
                       ),
                     ),
@@ -94,20 +96,19 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 child: Container(
                   child: Stack(
                     children: <Widget>[
-                      Container(
-                          height: 200,
-                          child: Center(
-                              child: SpinKitCircle(
-                            color: Colors.blue,
-                            size: 60,
-                          ))),
-                      Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: FadeInImage.memoryNetwork(
-                            placeholder: kTransparentImage,
-                            image: widget.post.imageUrl,
-                          ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.post.imageUrl,
+                          placeholder: (context, url) => Container(
+                              height: 400,
+                              child: Center(
+                                  child: SpinKitCircle(
+                                color: Colors.blue,
+                                size: 60,
+                              ))),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ],
@@ -147,9 +148,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
               ),
               if (address != '')
                 Padding(
-                  padding: EdgeInsets.all(18),
+                  padding: const EdgeInsets.all(18),
                   child: Container(
-                    child: Text("Location  : "  + address),
+                    child: Text("Location  : " + address),
                   ),
                 )
             ],

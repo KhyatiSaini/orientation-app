@@ -15,9 +15,9 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
-
+  final Key key1 = new Key("bottom bar");
   String username = " ";
   String email = " ";
   int _currentIndex = 0;
@@ -28,11 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
     Container(),
     Container()
   ];
+  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(vsync: this, length: _children.length);
     setDetails();
+  }
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   void setDetails() async {
@@ -44,35 +51,39 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
-      key: key,
-      appBar: appbar,
-      backgroundColor: Colors.white,
-      drawer: AppDrawer(email, username),
-      body: _children[_currentIndex],
-      bottomNavigationBar: CurvedNavigationBar(
-        color: Colors.blue,
-        backgroundColor: Colors.transparent,
-        buttonBackgroundColor: Colors.blue,
-        items: [
-          Icon(Icons.dynamic_feed, size: 30, color: Colors.white),
-          Icon(Icons.map, size: 30, color: Colors.white),
-          Icon(Icons.camera, size: 30, color: Colors.white),
-          Icon(Icons.explore, size: 30, color: Colors.white),
-          Icon(Icons.calendar_today_rounded, size: 30, color: Colors.white),
-        ],
-        animationCurve: Curves.bounceInOut,
-        animationDuration: Duration(
-          milliseconds: 200,
+        key: key,
+        appBar: appbar,
+        backgroundColor: Colors.white,
+        drawer: AppDrawer(email, username),
+        body: TabBarView(children: _children , controller: _tabController),
+        bottomNavigationBar: CurvedNavigationBar(
+          color: Colors.blue,
+          backgroundColor: Colors.transparent,
+          buttonBackgroundColor: Colors.blue,
+          items: [
+            Icon(Icons.dynamic_feed, size: 30, color: Colors.white),
+            Icon(Icons.map, size: 30, color: Colors.white),
+            Icon(Icons.camera, size: 30, color: Colors.white),
+            Icon(Icons.explore, size: 30, color: Colors.white),
+            Icon(Icons.calendar_today_rounded, size: 30, color: Colors.white),
+          ],
+          animationCurve: Curves.bounceInOut,
+          animationDuration: Duration(
+            milliseconds: 200,
+          ),
+          onTap: (index) {
+            setState(() {
+              // _currentIndex = index;
+              _tabController.index = index;
+            });
+            print('current index is $index');
+          },
         ),
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          print('current index is $index');
-        },
-      ),
     );
   }
 }

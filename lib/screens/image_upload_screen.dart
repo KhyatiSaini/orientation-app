@@ -21,6 +21,7 @@ class ImageUploadScreen extends StatefulWidget {
 }
 
 class _ImageUploadScreenState extends State<ImageUploadScreen> {
+  final controller = new TextEditingController();
   File _image;
   LatLng _location;
   String _description;
@@ -178,7 +179,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                         onPressed: () async {
                           // ignore: deprecated_member_use
                           File file = await ImagePicker.pickImage(
-                              imageQuality: 50, source: ImageSource.gallery);
+                              imageQuality: 30, source: ImageSource.gallery);
                           setState(() {
                             _image = file;
                           });
@@ -208,7 +209,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                         onPressed: () async {
                           // ignore: deprecated_member_use
                           File file = await ImagePicker.pickImage(
-                              imageQuality: 50, source: ImageSource.camera);
+                              imageQuality: 30, source: ImageSource.camera);
                           setState(() {
                             _image = file;
                           });
@@ -227,6 +228,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                 onChanged: (desc) {
                   _description = desc;
                 },
+                controller: controller,
                 decoration: InputDecoration(labelText: "Description"),
               ),
             ),
@@ -238,6 +240,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                     child: FlatButton.icon(
                       onPressed: () async {
                         try {
+                          FocusScope.of(context).requestFocus(FocusNode());
                           Location location = new Location();
                           var loc = await location.getLocationLowAccuracy();
                           LatLng markerposition = await Navigator.push(
@@ -246,7 +249,6 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                                   builder: (ctx) =>
                                       ChooseLocation(LatLng(
                                           loc['latitude'], loc['longitude']))));
-
                           setState(() {
                             _location = markerposition != null
                                 ? markerposition

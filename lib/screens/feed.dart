@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'post_detail_screen.dart';
@@ -13,7 +16,8 @@ class UserPostsFeed extends StatefulWidget {
   _UserPostsFeedState createState() => _UserPostsFeedState();
 }
 
-class _UserPostsFeedState extends State<UserPostsFeed> {
+class _UserPostsFeedState extends State<UserPostsFeed> with
+    AutomaticKeepAliveClientMixin<UserPostsFeed> {
   List<Post> posts = [];
   bool isLoading = false;
 
@@ -31,7 +35,6 @@ class _UserPostsFeedState extends State<UserPostsFeed> {
       Response response = await get(baseUrl + '/userposts/?format=json');
       var body = jsonDecode(response.body);
       int length = body.length;
-      print(body);
       List<Post> Posts = [];
       for (int i = 0; i < length; i++) {
         Posts.add(Post(
@@ -48,6 +51,14 @@ class _UserPostsFeedState extends State<UserPostsFeed> {
         isLoading = false;
       });
     } catch (e) {
+      Fluttertoast.showToast(
+          msg: "There is some error. Please try again later",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.blue,
+          fontSize: 16.0);
       print(e);
     }
   }
@@ -68,13 +79,13 @@ class _UserPostsFeedState extends State<UserPostsFeed> {
                   width: double.infinity,
                   child: Stack(
                     children: <Widget>[
-                      Container(
-                          height: 200,
-                          child: Center(
-                              child: SpinKitCircle(
-                            color: Colors.blue,
-                            size: 60,
-                          ))),
+                      // Container(
+                      //     height: 200,
+                      //     child: Center(
+                      //         child: SpinKitCircle(
+                      //       color: Colors.blue,
+                      //       size: 60,
+                      //     ))),
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
@@ -82,11 +93,14 @@ class _UserPostsFeedState extends State<UserPostsFeed> {
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
-                          child: Center(
-                            child: FadeInImage.memoryNetwork(
-                              placeholder: kTransparentImage,
-                              image: post.imageUrl,
-                            ),
+                          child: CachedNetworkImage(
+                            imageUrl: post.imageUrl,
+                            placeholder: (context, url) => Container(
+                              height: 400,
+                                child:
+                                    Center(child: SpinKitCircle(color: Colors.blue, size: 60,))),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         ),
                       ),
@@ -95,8 +109,8 @@ class _UserPostsFeedState extends State<UserPostsFeed> {
                 ),
                 ListTile(
                     title: Text(post.userName),
-                    subtitle:
-                        Text(post.description, style: TextStyle(fontFamily: '')))
+                    subtitle: Text(post.description,
+                        style: TextStyle(fontFamily: '')))
               ],
             ),
           ),
@@ -123,4 +137,8 @@ class _UserPostsFeedState extends State<UserPostsFeed> {
             ),
           );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
