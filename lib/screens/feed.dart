@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,15 +8,15 @@ import 'package:http/http.dart';
 import 'post_detail_screen.dart';
 import 'package:orientation_app/classes/posts.dart';
 import 'package:orientation_app/utilities/constants.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class UserPostsFeed extends StatefulWidget {
   @override
   _UserPostsFeedState createState() => _UserPostsFeedState();
 }
 
-class _UserPostsFeedState extends State<UserPostsFeed> with
-    AutomaticKeepAliveClientMixin<UserPostsFeed> {
+class _UserPostsFeedState extends State<UserPostsFeed>
+    with AutomaticKeepAliveClientMixin<UserPostsFeed> {
   List<Post> posts = [];
   bool isLoading = false;
 
@@ -28,6 +27,40 @@ class _UserPostsFeedState extends State<UserPostsFeed> with
       isLoading = true;
     });
     fetchAndSetProducts();
+  }
+
+  Future<void> fetchAndSetProducts2() async {
+    try {
+      Response response = await get(baseUrl + '/userposts/?format=json');
+      var body = jsonDecode(response.body);
+      int length = body.length;
+      List<Post> Posts = [];
+      for (int i = 0; i < length; i++) {
+        Posts.add(Post(
+            email: body[i]['userEmail'],
+            imageUrl: body[i]['imageUrl'],
+            description: body[i]['description'],
+            timestamp: body[i]['timeOfUpload'],
+            userName: body[i]['userName'],
+            location: LatLng(double.parse(body[i]['latitude']),
+                double.parse(body[i]['longitude']))));
+      }
+      setState(() {
+        posts = Posts;
+        isLoading = false;
+      });
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: "There is some error. Please try again later",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.blue,
+          fontSize: 16.0);
+      print(e);
+    }
+    return;
   }
 
   void fetchAndSetProducts() async {
@@ -96,9 +129,12 @@ class _UserPostsFeedState extends State<UserPostsFeed> with
                           child: CachedNetworkImage(
                             imageUrl: post.imageUrl,
                             placeholder: (context, url) => Container(
-                              height: 400,
-                                child:
-                                    Center(child: SpinKitCircle(color: Colors.blue, size: 60,))),
+                                height: 400,
+                                child: Center(
+                                    child: SpinKitCircle(
+                                  color: Colors.blue,
+                                  size: 60,
+                                ))),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
                           ),
@@ -129,11 +165,18 @@ class _UserPostsFeedState extends State<UserPostsFeed> with
               color: Colors.blue,
             ),
           )
-        : Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(children: getPosts()),
+        : LiquidPullToRefresh(
+            showChildOpacityTransition: false,
+            onRefresh: () async {
+              await fetchAndSetProducts2();
+              return;
+            },
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(children: getPosts()),
+              ),
             ),
           );
   }
