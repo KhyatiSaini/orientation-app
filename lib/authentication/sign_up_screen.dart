@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'Signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -48,12 +49,17 @@ class _SignUpPage extends State<SignUp> {
         var resp = await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _email.trim(), password: _password.trim());
         // ignore: deprecated_member_use
-        await Firestore.instance.collection('user').add({
-          "id": resp.user.uid,
-          "email": _email.trim(),
-          "username": _username.trim(),
-          "created_at": Timestamp.now()
-        });
+        print(_username);
+        await FirebaseAuth.instance.currentUser.updateProfile(displayName: _username);
+        Fluttertoast.showToast(
+            msg: "Successfully Signed Up & Logged-In",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            textColor: Colors.blue,
+            fontSize: 16.0
+        );
         Navigator.of(context).pop();
       } catch (e) {
         print(e);

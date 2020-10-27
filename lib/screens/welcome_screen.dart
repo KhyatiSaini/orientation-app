@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:orientation_app/authentication/Signin.dart';
 import '../authentication/sign_up_screen.dart';
 import '../authentication/sign_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 class WelcomeScreen extends StatefulWidget {
   static String route = "/welcome-screen";
 
@@ -15,6 +18,44 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  bool load = false;
+
+  Future<void> loginWithGoogle() async {
+    try {
+      setState(() {
+        load = true;
+      });
+      final GoogleSignInAccount googleSignInAccount =
+          await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+
+      // ignore: deprecated_member_use
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      final authResult = await _auth.signInWithCredential(credential);
+      final user = authResult.user;
+      Fluttertoast.showToast(
+          msg: "Successfully Signed In",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.blue,
+          fontSize: 16.0
+      );
+    } catch (e) {
+      print("Error");
+      setState(() {
+        load = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,14 +116,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: MaterialButton(
                   height: 48,
                   color: Colors.white,
-                  onPressed: () => print('sign-in with google'),
-                  child: Text(
-                    'Sign in with Google',
-                    style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  onPressed: loginWithGoogle,
+                  child: load
+                      ? SpinKitCircle(
+                          color: Colors.blue,
+                        )
+                      : Text(
+                          'Sign in with Google',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold),
+                        ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(17.0),
                   ),

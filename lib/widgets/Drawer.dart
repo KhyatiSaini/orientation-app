@@ -1,23 +1,48 @@
 import 'package:flutter/material.dart';
 import '../screens/hostels_screen.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  String email;
+  String username;
+  String icon = "USER";
+
+  AppDrawer(this.email, this.username);
+
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  String icon = "";
+
   @override
   Widget build(BuildContext context) {
     final style = TextStyle(
         color: Colors.black, fontSize: 20, fontWeight: FontWeight.w400);
+    String UserIcon() {
+      List<String> name = widget.username.split(" ");
+      String a = "";
+      for (String n in name) {
+        a = a + n[0];
+      }
+      a = a.toUpperCase();
+      if (a == "") {
+        return "USER";
+      }
+      return a;
+    }
 
     return Drawer(
         child: ListView(children: [
       UserAccountsDrawerHeader(
-        accountName: Text("Mrigank Anand"),
-        accountEmail: Text("abcd@gmail.com"),
+        accountName: Text(widget.username),
+        accountEmail: Text(widget.email),
         currentAccountPicture: CircleAvatar(
           backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
               ? Colors.blue
               : Colors.white,
           child: Text(
-            "A",
+            UserIcon(),
             style: TextStyle(fontSize: 40.0),
           ),
         ),

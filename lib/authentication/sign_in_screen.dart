@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:orientation_app/screens/home_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -50,6 +51,15 @@ class _signInState extends State<signIn> {
           setState(() {
             isLoading = false;
           });
+          Fluttertoast.showToast(
+              msg: "Successfully Signed In",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.white,
+              textColor: Colors.blue,
+              fontSize: 16.0
+          );
           Navigator.pop(context);
         } catch (e) {
           print(e);
