@@ -38,6 +38,9 @@ class _ChooseLocationState extends State<ChooseLocation> {
         height: double.infinity,
         width: double.infinity,
         child: GoogleMap(
+          myLocationEnabled: true,
+          zoomGesturesEnabled: true,
+          zoomControlsEnabled: false,
           markers: {
             if (location != null)
               Marker(

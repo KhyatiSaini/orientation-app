@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'dart:math';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'Choose_location_screen.dart';
 import '../utilities/location.dart';
+import 'map.dart';
 
 class ImageUploadScreen extends StatefulWidget {
   @override
@@ -14,9 +17,55 @@ class ImageUploadScreen extends StatefulWidget {
 class _ImageUploadScreenState extends State<ImageUploadScreen> {
   File _image;
   LatLng _location;
-  String description;
+  String _description;
 
-  void uploadPost() {}
+  void uploadPost() async {
+    if (_image == null) {
+      Fluttertoast.showToast(
+          msg: "Please choose an image",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.redAccent,
+          fontSize: 16.0);
+      return;
+    }
+    // if(_location == null){
+    //   Fluttertoast.showToast(
+    //       msg:
+    //       "Please choose an location",
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.BOTTOM,
+    //       timeInSecForIosWeb: 1,
+    //       backgroundColor: Colors.white,
+    //       textColor: Colors.redAccent,
+    //       fontSize: 16.0);
+    //   return;
+    // }
+    // if(_description == null){
+    //   Fluttertoast.showToast(
+    //       msg:
+    //       "Please write a description",
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.BOTTOM,
+    //       timeInSecForIosWeb: 1,
+    //       backgroundColor: Colors.white,
+    //       textColor: Colors.redAccent,
+    //       fontSize: 16.0);
+    //   return;
+    // }
+    final ref = FirebaseStorage.instance.ref().child('user-image').child(
+        Random().nextInt(4294967296).toString() +
+            Random().nextInt(4294967296).toString() +
+            Random().nextInt(4294967296).toString() +
+            Random().nextInt(4294967296).toString() +
+            '.jpg');
+    await ref.putFile(_image).onComplete;
+    final url = await ref.getDownloadURL();
+    print(url);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +110,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                         onPressed: () async {
                           // ignore: deprecated_member_use
                           File file = await ImagePicker.pickImage(
+                            imageQuality: 50,
                               source: ImageSource.gallery);
                           setState(() {
                             _image = file;
@@ -87,6 +137,7 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                         onPressed: () async {
                           // ignore: deprecated_member_use
                           File file = await ImagePicker.pickImage(
+                            imageQuality: 50,
                               source: ImageSource.camera);
                           setState(() {
                             _image = file;
@@ -103,6 +154,9 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
               padding: const EdgeInsets.all(18.0),
               child: TextField(
                 maxLines: 3,
+                onChanged: (desc) {
+                  _description = desc;
+                },
                 decoration: InputDecoration(labelText: "Description"),
               ),
             ),
@@ -123,7 +177,9 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                                       loc['latitude'], loc['longitude']))));
 
                           setState(() {
-                            _location = markerposition;
+                            _location = markerposition != null
+                                ? markerposition
+                                : _location;
                           });
                           print(markerposition);
                         } catch (e) {
@@ -148,7 +204,35 @@ class _ImageUploadScreenState extends State<ImageUploadScreen> {
                   ),
                 ),
               ],
-            )
+            ),
+            if (_location != null)
+              Container(height: 400, child: Map(_location)),
+            Container(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: MaterialButton(
+                    height: 48,
+                    color: Colors.blue,
+                    onPressed: () {
+                      uploadPost();
+                    },
+                    child: Text(
+                      'Upload Post',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                          color: Colors.white,
+                          width: 2,
+                          style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(17.0),
+                    )),
+              ),
+            ),
           ],
         ),
       ),
