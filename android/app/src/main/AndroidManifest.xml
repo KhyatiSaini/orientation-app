@@ -8,7 +8,9 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="orientation_app"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD8mV2YNOuiucoiS39ARdXxbg8Rv7fSu9U"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -43,6 +45,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7983119257908874~6962470387"/>
     </application>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
