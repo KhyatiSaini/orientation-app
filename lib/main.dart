@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/authentication/sign_in_screen.dart';
 import 'package:orientation_app/authentication/sign_up_screen.dart';
 import 'authentication/Signin.dart';
 import 'screens/welcome_screen.dart';
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.route: (context) => HomeScreen(),
           HostelsList.route: (context) => HostelsList(),
           NithMapScreen.route: (context) => NithMapScreen(),
-          LocationScreen.route: (context) => LocationScreen()
+          LocationScreen.route: (context) => LocationScreen(),
         },
       ),
     );

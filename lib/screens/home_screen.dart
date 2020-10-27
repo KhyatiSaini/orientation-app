@@ -3,11 +3,13 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:orientation_app/screens/college_map_screen.dart';
+import 'package:orientation_app/screens/image_upload_screen.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
 import '../widgets/appbar.dart';
 
 class HomeScreen extends StatefulWidget {
   static String route = "/home-screen";
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -21,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _children = [
     Container(),
     NithMapScreen(),
-    Container(),
+    ImageUploadScreen(),
     Container(),
     Container()
   ];
