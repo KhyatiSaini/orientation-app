@@ -32,6 +32,7 @@ dependencies:
   firebase_admob: ^0.10.0+2
   cached_network_image: ^2.3.3
   liquid_pull_to_refresh: ^2.0.0
+  firebase_messaging: ^7.0.3
 
 
 

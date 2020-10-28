@@ -58,7 +58,7 @@ class _NithMapScreenState extends State<NithMapScreen> {
                 ),
               ])
             : Center(
-                child: SpinKitCircle(
+                child: SpinKitFadingCube(
                   color: Colors.blue,
                   size: 60,
                 ),

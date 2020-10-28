@@ -160,8 +160,8 @@ class _UserPostsFeedState extends State<UserPostsFeed>
   Widget build(BuildContext context) {
     return isLoading
         ? Center(
-            child: SpinKitCircle(
-              size: 50,
+            child: SpinKitCubeGrid(
+              size: 60,
               color: Colors.blue,
             ),
           )

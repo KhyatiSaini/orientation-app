@@ -128,8 +128,8 @@ class _HostelsListState extends State<HostelsList> {
           padding: EdgeInsets.only(bottom: 50),
           child: showSpinner
               ? Center(
-                  child: SpinKitFadingFour(
-                  color: Colors.black,
+                  child: SpinKitWave(
+                  color: Colors.blue,
                 ))
               : SingleChildScrollView(
                   child: Column(
