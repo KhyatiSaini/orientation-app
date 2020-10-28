@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HostelDetailCard extends StatefulWidget {
   final String imageUrl;
@@ -16,51 +18,41 @@ class _HostelDetailCardState extends State<HostelDetailCard> {
   bool expand = false;
 
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(widget.imageUrl),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Card(
+          child: new Column(
+            children: <Widget>[
+              Stack(
+                children: [
+                  Container(
+                      height: 200,
+                      child: Center(
+                          child: SpinKitCircle(
+                        color: Colors.blue,
+                        size: 60,
+                      ))),
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Center(
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: widget.imageUrl,
+                        ),
+                      ))
+                ],
               ),
-              title: Text(widget.title),
-              trailing: IconButton(
-                icon:
-                    expand ? Icon(Icons.expand_less) : Icon(Icons.expand_more),
-                onPressed: () {
-                  setState(() {
-                    expand = !expand;
-                  });
-                },
+              new Text(
+                widget.title,
+                style: TextStyle(fontSize: 30),
               ),
-            ),
-            if (expand == true)
-              Container(
-                width: double.infinity,
-                height: 100,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Title(
-                          color: Colors.black,
-                          child: Text(
-                            "Description",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400),
-                          )),
-                      Center(
-                        child: Text(widget.description),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-          ],
+              new Padding(
+                  padding: new EdgeInsets.all(7.0),
+                  child: Text(widget.description))
+            ],
+          ),
         ),
       ),
     );

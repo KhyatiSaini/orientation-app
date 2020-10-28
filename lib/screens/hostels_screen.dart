@@ -18,6 +18,7 @@ class _HostelsListState extends State<HostelsList> {
   BannerAd myBanner;
 
   @override
+  // ignore: must_call_super
   void dispose() {
     myBanner.dispose();
   }
@@ -108,25 +109,33 @@ class _HostelsListState extends State<HostelsList> {
   @override
   Widget build(BuildContext context) {
     var details = Provider.of<Hostels>(context).hostels;
+
+    List<Widget> getHostels() {
+      List<Widget>  Hostels = [];
+      for (int i = 0; i < details.length; i++) {
+        Hostels.add(HostelDetailCard(details[i].imageUrl, details[i].hostelName,
+            details[i].description));
+      }
+      return Hostels;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Hostels"),
       ),
       // navigation drawer
       body: Container(
-        child: showSpinner
-            ? Center(
-                child: SpinKitFadingFour(
-                color: Colors.black,
-              ))
-            : ListView.builder(
-                itemBuilder: (ctx, i) {
-                  return HostelDetailCard(details[i].imageUrl,
-                      details[i].hostelName, details[i].description);
-                },
-                itemCount: details.length,
-              ),
-      ),
+          padding: EdgeInsets.only(bottom: 50),
+          child: showSpinner
+              ? Center(
+                  child: SpinKitFadingFour(
+                  color: Colors.black,
+                ))
+              : SingleChildScrollView(
+                  child: Column(
+                    children: getHostels(),
+                  ),
+                )),
     );
   }
 }
