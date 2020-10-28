@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/hostels_screen.dart';
-
+import '../screens/club_screen.dart';
 class AppDrawer extends StatefulWidget {
   String email;
   String username;
@@ -84,7 +84,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, ClubsScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.local_activity)),
         title: Text(
           "Clubs",

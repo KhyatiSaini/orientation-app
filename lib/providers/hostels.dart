@@ -7,7 +7,7 @@ import 'package:orientation_app/utilities/constants.dart';
 class Hostels extends ChangeNotifier {
   List<Hostel> _hostels = [];
 
-  List<Hostel> get hostels => _hostels;
+  List<Hostel> get hostels => [..._hostels];
 
   Future<void> fetchAndSetHostels() async {
     try {
