@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class HostelDetailCard extends StatefulWidget {
+class SportCard extends StatefulWidget {
   final String imageUrl;
   final String title;
   final String description;
 
-  HostelDetailCard(this.imageUrl, this.title, this.description);
+  SportCard(this.imageUrl, this.title, this.description);
 
   @override
-  _HostelDetailCardState createState() => _HostelDetailCardState();
+  _SportCardState createState() => _SportCardState();
 }
 
-class _HostelDetailCardState extends State<HostelDetailCard> {
+class _SportCardState extends State<SportCard> {
   @override
   bool expand = false;
 

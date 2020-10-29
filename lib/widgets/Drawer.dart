@@ -3,7 +3,7 @@ import 'package:orientation_app/screens/chat_screen.dart';
 import '../screens/hostels_screen.dart';
 import '../screens/club_screen.dart';
 import '../screens/societies.dart';
-
+import '../screens/sports_screen.dart';
 class AppDrawer extends StatefulWidget {
   String email;
   String username;
@@ -114,7 +114,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, SportsScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.golf_course)),
         title: Text(
           "Sports",

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-class Event {
+class Sport {
   final String id;
   final String sportName;
   final String description;
   final String imageUrl;
 
-  Event(
+  Sport(
       {@required this.id,
         @required this.sportName,
         @required this.description,
