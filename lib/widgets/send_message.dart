@@ -20,15 +20,15 @@ class _SendMessageState extends State<SendMessage> {
         "email": user.email,
         "username": user.displayName,
         "uid": user.uid,
-        "time": Timestamp.now()
+        "time": DateTime.now().toString()
       };
-      // ignore: deprecated_member_use
-      var response = await Firestore.instance.collection('chat').add(data);
-      print(response);
       setState(() {
         controller.text = "";
         message = "";
       });
+      // ignore: deprecated_member_use
+      var response = await Firestore.instance.collection('chat').add(data);
+      print(response);
       Fluttertoast.showToast(
           msg: "Message sent successfully.",
           toastLength: Toast.LENGTH_SHORT,
@@ -38,7 +38,10 @@ class _SendMessageState extends State<SendMessage> {
           textColor: Colors.blue,
           fontSize: 16.0);
     } catch (e) {
-      print(e);
+      setState(() {
+        controller.text = "";
+        message = "";
+      });
       Fluttertoast.showToast(
           msg: "There was some error please try again later.",
           toastLength: Toast.LENGTH_SHORT,

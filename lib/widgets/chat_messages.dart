@@ -22,7 +22,7 @@ class _ChatMessagesState extends State<ChatMessages> {
           var docs = chatsnapshot.data.documents;
 
           return ListView.builder(
-              itemBuilder: (ctx, index) => Message(docs[index]["message"], docs[index]["username"], docs[index]["uid"] == user.uid),
+              itemBuilder: (ctx, index) => Message(docs[index]["message"], docs[index]["username"], docs[index]["uid"] == user.uid, docs[index]["time"]),
               reverse: true,
               itemCount: docs.length);
         },
