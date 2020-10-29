@@ -19,5 +19,9 @@ List colors = [
   Colors.blue[500],
   Colors.blue[600],
   Colors.blue[700],
-  Colors.blue[800]
+  Colors.blue[800],
+  Colors.lightBlueAccent,
+  Colors.lightBlueAccent[700],
+  Colors.lightBlueAccent[400],
+  Colors.lightBlueAccent[100],
 ];

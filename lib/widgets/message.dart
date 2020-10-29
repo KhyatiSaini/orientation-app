@@ -68,6 +68,8 @@ class _MessageState extends State<Message> {
 
     return hour + ":" + minute + " " + stamp;
   }
+
+
   bool pressed = false;
 
 
@@ -93,7 +95,7 @@ class _MessageState extends State<Message> {
                 child: Container(
                   width: pressed ? 200 : 140,
                   decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: colors[Random().nextInt(22)],
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding:
@@ -134,7 +136,7 @@ class _MessageState extends State<Message> {
           ),
           Positioned(
             child: CircleAvatar(
-              backgroundColor: colors[Random().nextInt(19)],
+              backgroundColor: colors[Random().nextInt(22)],
               maxRadius: 20,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -156,16 +158,3 @@ class _MessageState extends State<Message> {
   }
 }
 
-//
-// class Message extends StatelessWidget {
-//   String message;
-//   String username;
-//   String datetime;
-//   bool isCurrentLoggedInUser;
-//
-//   Message(
-//       this.message, this.username, this.isCurrentLoggedInUser, this.datetime);
-//
-//
-//   }
-// }

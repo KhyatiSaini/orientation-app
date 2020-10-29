@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:orientation_app/authentication/sign_up_screen.dart';
 import 'package:orientation_app/providers/clubs.dart';
+import 'package:orientation_app/providers/socities.dart';
 import 'authentication/Signin.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/home_screen.dart';
@@ -13,6 +14,7 @@ import 'screens/college_map_screen.dart';
 import 'screens/location_screen.dart';
 import 'screens/club_screen.dart';
 import 'screens/chat_screen.dart';
+import 'screens/societies.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Hostels()), ChangeNotifierProvider(create: (_) => Clubs())],
+      providers: [ChangeNotifierProvider(create: (_) => Hostels()), ChangeNotifierProvider(create: (_) => Clubs()),  ChangeNotifierProvider(create: (_) => Societies())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: StreamBuilder(
@@ -49,7 +51,8 @@ class MyApp extends StatelessWidget {
           NithMapScreen.route: (context) => NithMapScreen(),
           LocationScreen.route: (context) => LocationScreen(),
           ClubsScreen.route: (context) => ClubsScreen(),
-          ChatScreen.route: (context) => ChatScreen()
+          ChatScreen.route: (context) => ChatScreen(),
+          SocietyScreen.route: (context) => SocietyScreen()
         },
       ),
     );

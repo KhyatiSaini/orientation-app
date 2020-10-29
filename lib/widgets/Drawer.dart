@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:orientation_app/screens/chat_screen.dart';
 import '../screens/hostels_screen.dart';
 import '../screens/club_screen.dart';
+import '../screens/societies.dart';
+
 class AppDrawer extends StatefulWidget {
   String email;
   String username;
@@ -101,7 +103,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, SocietyScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.group)),
         title: Text(
           "Societies",
