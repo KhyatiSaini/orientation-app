@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:orientation_app/screens/chat_screen.dart';
+import 'package:orientation_app/screens/places_to_eat_screen.dart';
 import '../screens/hostels_screen.dart';
 import '../screens/club_screen.dart';
 import '../screens/societies.dart';
 import '../screens/sports_screen.dart';
+
 class AppDrawer extends StatefulWidget {
   String email;
   String username;
@@ -32,8 +34,8 @@ class _AppDrawerState extends State<AppDrawer> {
       if (a == "") {
         return "USER";
       }
-      if(a.length >2){
-        return a.substring(0,2);
+      if (a.length > 2) {
+        return a.substring(0, 2);
       }
       return a;
     }
@@ -136,10 +138,12 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, PlacesToEatScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.fastfood)),
         title: Text(
-          "Food Courts",
+          "Places to Eat",
           style: style,
         ),
       ),

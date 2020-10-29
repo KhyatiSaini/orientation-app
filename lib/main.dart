@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:orientation_app/authentication/sign_up_screen.dart';
 import 'package:orientation_app/providers/Sports.dart';
 import 'package:orientation_app/providers/clubs.dart';
+import 'package:orientation_app/providers/placestoeat.dart';
 import 'package:orientation_app/providers/socities.dart';
+import 'package:orientation_app/screens/places_to_eat_screen.dart';
 import 'package:orientation_app/screens/sports_screen.dart';
 import 'authentication/Signin.dart';
 import 'screens/welcome_screen.dart';
@@ -32,6 +34,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => Hostels()),
         ChangeNotifierProvider(create: (_) => Clubs()),
+        ChangeNotifierProvider(create: (_) => PlacesToEat()),
         ChangeNotifierProvider(create: (_) => Sports()),
         ChangeNotifierProvider(create: (_) => Societies())
       ],
@@ -61,7 +64,8 @@ class MyApp extends StatelessWidget {
           ClubsScreen.route: (context) => ClubsScreen(),
           ChatScreen.route: (context) => ChatScreen(),
           SocietyScreen.route: (context) => SocietyScreen(),
-          SportsScreen.route: (context) => SportsScreen()
+          SportsScreen.route: (context) => SportsScreen(),
+          PlacesToEatScreen.route: (context) => PlacesToEatScreen()
         },
       ),
     );

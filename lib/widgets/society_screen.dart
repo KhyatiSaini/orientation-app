@@ -70,10 +70,22 @@ class SocietyDetail extends StatelessWidget {
                 children: [
                   if (society.president.id !=
                       "81979dbf-c573-48ed-b178-b25a216456b3")
-                    Text("President", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),),
+                    Text(
+                      "President",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20),
+                    ),
                   if (society.vicePresident.id !=
                       "1b6d6efc-436f-4b98-86b0-daca7eec29c8")
-                    Text("Vice President", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),),
+                    Text(
+                      "Vice President",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20),
+                    ),
                 ],
               ),
               Padding(
@@ -88,7 +100,7 @@ class SocietyDetail extends StatelessWidget {
                           child: CircleAvatar(
                             maxRadius: 50,
                             backgroundImage:
-                            NetworkImage(society.president.imageUrl),
+                                NetworkImage(society.president.imageUrl),
                           ),
                           maxRadius: 53,
                           backgroundColor: Colors.blue,
@@ -101,7 +113,7 @@ class SocietyDetail extends StatelessWidget {
                           child: CircleAvatar(
                             maxRadius: 50,
                             backgroundImage:
-                            NetworkImage(society.vicePresident.imageUrl),
+                                NetworkImage(society.vicePresident.imageUrl),
                           ),
                           maxRadius: 53,
                           backgroundColor: Colors.blue,
@@ -126,12 +138,12 @@ class SocietyDetail extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                                 child: Text(
-                                  society.president.name,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300),
-                                )),
+                              society.president.name,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
+                            )),
                           )),
                     if (society.vicePresident.id !=
                         "1b6d6efc-436f-4b98-86b0-daca7eec29c8")
@@ -144,16 +156,16 @@ class SocietyDetail extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                                 child: Text(
-                                  society.vicePresident.name,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300),
-                                )),
-                          )),                ],
+                              society.vicePresident.name,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
+                            )),
+                          )),
+                  ],
                 ),
               ),
-
               SizedBox(
                 height: 55,
               )
