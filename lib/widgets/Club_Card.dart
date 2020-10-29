@@ -30,7 +30,7 @@ class _ClubCardState extends State<ClubCard> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: double.infinity,
+                          width: double.infinity,
                           height: 200,
                           child: Center(
                               child: SpinKitCircle(
@@ -121,7 +121,10 @@ class _ClubCardState extends State<ClubCard> {
                             child: Center(
                                 child: Text(
                               widget.club.president.name,
-                              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w300),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300),
                             )),
                           )),
                       Container(
@@ -133,7 +136,10 @@ class _ClubCardState extends State<ClubCard> {
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                               child: Text(widget.club.vicePresident.name,
-                                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w300)),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300)),
                             ),
                           ))
                     ],

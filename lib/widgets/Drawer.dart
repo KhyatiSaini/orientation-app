@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orientation_app/screens/chat_screen.dart';
 import '../screens/hostels_screen.dart';
 import '../screens/club_screen.dart';
 class AppDrawer extends StatefulWidget {
@@ -66,7 +67,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, ChatScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.chat)),
         title: Text(
           "Chat Box",

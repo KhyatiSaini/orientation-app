@@ -12,7 +12,7 @@ import 'providers/hostels.dart';
 import 'screens/college_map_screen.dart';
 import 'screens/location_screen.dart';
 import 'screens/club_screen.dart';
-
+import 'screens/chat_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -48,7 +48,8 @@ class MyApp extends StatelessWidget {
           HostelsList.route: (context) => HostelsList(),
           NithMapScreen.route: (context) => NithMapScreen(),
           LocationScreen.route: (context) => LocationScreen(),
-          ClubsScreen.route: (context) => ClubsScreen()
+          ClubsScreen.route: (context) => ClubsScreen(),
+          ChatScreen.route: (context) => ChatScreen()
         },
       ),
     );
