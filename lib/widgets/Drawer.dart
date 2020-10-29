@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:orientation_app/screens/chat_screen.dart';
+import 'package:orientation_app/screens/places_to_eat_screen.dart';
 import '../screens/hostels_screen.dart';
+import '../screens/club_screen.dart';
+import '../screens/societies.dart';
+import '../screens/sports_screen.dart';
 
 class AppDrawer extends StatefulWidget {
   String email;
@@ -28,6 +33,9 @@ class _AppDrawerState extends State<AppDrawer> {
       a = a.toUpperCase();
       if (a == "") {
         return "USER";
+      }
+      if (a.length > 2) {
+        return a.substring(0, 2);
       }
       return a;
     }
@@ -66,7 +74,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, ChatScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.chat)),
         title: Text(
           "Chat Box",
@@ -84,7 +94,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, ClubsScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.local_activity)),
         title: Text(
           "Clubs",
@@ -93,7 +105,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, SocietyScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.group)),
         title: Text(
           "Societies",
@@ -102,7 +116,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, SportsScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.golf_course)),
         title: Text(
           "Sports",
@@ -122,10 +138,12 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, PlacesToEatScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.fastfood)),
         title: Text(
-          "Food Courts",
+          "Places to Eat",
           style: style,
         ),
       ),
