@@ -32,7 +32,7 @@ class _SendMessageState extends State<SendMessage> {
       Fluttertoast.showToast(
           msg: "Message sent successfully.",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
+          gravity: ToastGravity.TOP,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.white,
           textColor: Colors.blue,
@@ -42,7 +42,7 @@ class _SendMessageState extends State<SendMessage> {
       Fluttertoast.showToast(
           msg: "There was some error please try again later.",
           toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
+          gravity: ToastGravity.TOP,
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.white,
           textColor: Colors.red,
