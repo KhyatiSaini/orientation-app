@@ -30,6 +30,9 @@ class _AppDrawerState extends State<AppDrawer> {
       if (a == "") {
         return "USER";
       }
+      if(a.length >2){
+        return a.substring(0,2);
+      }
       return a;
     }
 

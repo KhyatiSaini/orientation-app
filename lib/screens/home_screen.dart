@@ -35,7 +35,12 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-
+    var details = FirebaseAuth.instance.currentUser;
+    var name = details.displayName;
+    setState(() {
+      email = details.email;
+      username = name == null ? " " : name;
+    });
     final fbm = FirebaseMessaging();
     fbm.requestNotificationPermissions();
     fbm.configure(onMessage: (msg) {
@@ -50,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen>
     });
 
     _tabController = TabController(vsync: this, length: _children.length);
-    setDetails();
   }
 
   @override
@@ -59,16 +63,9 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  void setDetails() async {
-    var details = await FirebaseAuth.instance.currentUser;
-    var name = details.displayName;
-    setState(() {
-      email = details.email;
-      username = name == null ? " " : name;
-    });
-  }
 
   Widget build(BuildContext context) {
+
     return Scaffold(
       key: key,
       appBar: appbar,

@@ -55,7 +55,10 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       if (a == "") {
         return "USER";
       }
-      return a.substring(0, 2);
+      if(a.length >2){
+        return a.substring(0,2);
+      }
+      return a;
     }
 
     DateTime dateTime = DateTime.parse(widget.post.timestamp);
