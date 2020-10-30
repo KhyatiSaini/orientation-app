@@ -6,6 +6,7 @@ import 'package:orientation_app/authentication/sign_up_screen.dart';
 import 'package:orientation_app/providers/Sports.dart';
 import 'package:orientation_app/providers/clubs.dart';
 import 'package:orientation_app/providers/placestoeat.dart';
+import 'package:orientation_app/providers/placestovisit.dart';
 import 'package:orientation_app/providers/socities.dart';
 import 'package:orientation_app/screens/Contributors.dart';
 import 'package:orientation_app/screens/places_to_eat_screen.dart';
@@ -21,7 +22,7 @@ import 'screens/location_screen.dart';
 import 'screens/club_screen.dart';
 import 'screens/chat_screen.dart';
 import 'screens/societies.dart';
-
+import 'screens/PlacesToVisitScreen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => Hostels()),
         ChangeNotifierProvider(create: (_) => Clubs()),
+        ChangeNotifierProvider(create: (_) => PlacesToVisitProvider()),
         ChangeNotifierProvider(create: (_) => PlacesToEat()),
         ChangeNotifierProvider(create: (_) => Sports()),
         ChangeNotifierProvider(create: (_) => Societies())
@@ -71,7 +73,8 @@ class MyApp extends StatelessWidget {
           SocietyScreen.route: (context) => SocietyScreen(),
           SportsScreen.route: (context) => SportsScreen(),
           PlacesToEatScreen.route: (context) => PlacesToEatScreen(),
-          Contributors.route: (context)=>Contributors()
+          Contributors.route: (context)=>Contributors(),
+          PlacesToVisitScreen.route: (context) => PlacesToVisitScreen()
         },
       ),
     );

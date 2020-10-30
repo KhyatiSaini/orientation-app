@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:orientation_app/screens/Contributors.dart';
+import 'package:orientation_app/screens/PlacesToVisitScreen.dart';
 import 'package:orientation_app/screens/chat_screen.dart';
 import 'package:orientation_app/screens/places_to_eat_screen.dart';
 import '../screens/hostels_screen.dart';
@@ -153,7 +154,9 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, PlacesToVisitScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.landscape)),
         title: Text(
           "Places to visit",
