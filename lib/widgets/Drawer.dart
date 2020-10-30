@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:orientation_app/screens/Contributors.dart';
 import 'package:orientation_app/screens/chat_screen.dart';
 import 'package:orientation_app/screens/places_to_eat_screen.dart';
 import '../screens/hostels_screen.dart';
@@ -162,6 +166,41 @@ class _AppDrawerState extends State<AppDrawer> {
           leading: CircleAvatar(child: Icon(Icons.store)),
           title: Text(
             "Shops",
+            style: style,
+          )),
+      Divider(),
+      ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, Contributors.route);
+          },
+          leading: CircleAvatar(child: Icon(Icons.store)),
+          title: Text(
+            "Contributors",
+            style: style,
+          )),
+      Divider(),
+      ListTile(
+          onTap: () async {
+            FirebaseAuth.instance.signOut();
+            try {
+              GoogleSignIn _googleSignIn = GoogleSignIn();
+              await _googleSignIn.signOut();
+
+              Fluttertoast.showToast(
+                  msg: "Successfully Logged-Out",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.blue,
+                  fontSize: 16.0);
+            } catch (e) {
+              print(e);
+            }
+          },
+          leading: CircleAvatar(child: Icon(Icons.logout)),
+          title: Text(
+            "Logout",
             style: style,
           )),
       Divider()
