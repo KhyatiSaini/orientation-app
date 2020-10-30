@@ -1,20 +1,18 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/providers/clubs.dart';
-import 'package:orientation_app/widgets/Club_Card.dart';
-import 'package:provider/provider.dart';
-import '../widgets/hostel_detail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../utilities/admanager.dart';
+import 'package:orientation_app/providers/shop.dart';
+import 'package:orientation_app/utilities/admanager.dart';
+import 'package:orientation_app/widgets/shop_card.dart';
+import 'package:provider/provider.dart';
 
-class ClubsScreen extends StatefulWidget {
-  static String route = "/club";
-
+class ShopScreen extends StatefulWidget {
+  static String route = "/shops";
   @override
-  _ClubsScreenState createState() => _ClubsScreenState();
+  _ShopScreenState createState() => _ShopScreenState();
 }
 
-class _ClubsScreenState extends State<ClubsScreen> {
+class _ShopScreenState extends State<ShopScreen> {
   bool showSpinner = true;
   BannerAd myBanner;
 
@@ -37,9 +35,11 @@ class _ClubsScreenState extends State<ClubsScreen> {
     } catch (e) {
       print(e);
     }
+
+
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<Clubs>(context, listen: false)
-          .fetchAndSetClubs()
+      Provider.of<Shops>(context, listen: false)
+          .fetchAndSetShops()
           .then((value) {
         setState(() {
           showSpinner = false;
@@ -110,31 +110,32 @@ class _ClubsScreenState extends State<ClubsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var details = Provider.of<Clubs>(context).clubs;
-    List<Widget> getClubs() {
-      List<Widget> Clubs = [];
+    var details = Provider.of<Shops>(context).shops;
+    List<Widget> getShops() {
+      List<Widget> Shops = [];
+      print(details);
       for (int i = 0; i < details.length; i++) {
-        Clubs.add(ClubCard(details[i]));
+        Shops.add(ShopCard(details[i]));
       }
-      return Clubs;
+      return Shops;
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text("Clubs"),
+        title: Text("Shops"),
       ),
       // navigation drawer
       body: Container(
           padding: EdgeInsets.only(bottom: 50),
           child: showSpinner
               ? Center(
-                  child: SpinKitWave(
-                  color: Colors.blue,
-                ))
+              child: SpinKitWave(
+                color: Colors.blue,
+              ))
               : SingleChildScrollView(
-                  child: Column(
-                    children: getClubs(),
-                  ),
-                )),
+            child: Column(
+              children: getShops(),
+            ),
+          )),
     );
   }
 }

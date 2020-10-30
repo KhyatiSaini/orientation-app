@@ -7,9 +7,11 @@ import 'package:orientation_app/providers/Sports.dart';
 import 'package:orientation_app/providers/clubs.dart';
 import 'package:orientation_app/providers/placestoeat.dart';
 import 'package:orientation_app/providers/placestovisit.dart';
+import 'package:orientation_app/providers/shop.dart';
 import 'package:orientation_app/providers/socities.dart';
 import 'package:orientation_app/screens/Contributors.dart';
 import 'package:orientation_app/screens/places_to_eat_screen.dart';
+import 'package:orientation_app/screens/shops.dart';
 import 'package:orientation_app/screens/sports_screen.dart';
 import 'authentication/Signin.dart';
 import 'screens/welcome_screen.dart';
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Hostels()),
+        ChangeNotifierProvider(create: (_) => Shops()),
         ChangeNotifierProvider(create: (_) => Clubs()),
         ChangeNotifierProvider(create: (_) => PlacesToVisitProvider()),
         ChangeNotifierProvider(create: (_) => PlacesToEat()),
@@ -74,7 +77,8 @@ class MyApp extends StatelessWidget {
           SportsScreen.route: (context) => SportsScreen(),
           PlacesToEatScreen.route: (context) => PlacesToEatScreen(),
           Contributors.route: (context)=>Contributors(),
-          PlacesToVisitScreen.route: (context) => PlacesToVisitScreen()
+          PlacesToVisitScreen.route: (context) => PlacesToVisitScreen(),
+          ShopScreen.route: (context) => ShopScreen()
         },
       ),
     );
