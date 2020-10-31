@@ -30,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen>
     NithMapScreen(),
     ImageUploadScreen(),
     Container(),
-    ChatWidget()
+    ChatWidget(),
+    Container()
   ];
   TabController _tabController;
 
