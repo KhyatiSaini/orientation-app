@@ -1,19 +1,18 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/providers/hostels.dart';
-import 'package:provider/provider.dart';
-import '../widgets/hostel_detail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../utilities/admanager.dart';
+import 'package:orientation_app/providers/shop.dart';
+import 'package:orientation_app/utilities/admanager.dart';
+import 'package:orientation_app/widgets/shop_card.dart';
+import 'package:provider/provider.dart';
 
-class HostelsList extends StatefulWidget {
-  static String route = "/hostels";
-
+class ShopScreen extends StatefulWidget {
+  static String route = "/shops";
   @override
-  _HostelsListState createState() => _HostelsListState();
+  _ShopScreenState createState() => _ShopScreenState();
 }
 
-class _HostelsListState extends State<HostelsList> {
+class _ShopScreenState extends State<ShopScreen> {
   bool showSpinner = true;
   BannerAd myBanner;
 
@@ -21,6 +20,7 @@ class _HostelsListState extends State<HostelsList> {
   // ignore: must_call_super
   void dispose() {
     myBanner.dispose();
+    super.dispose();
   }
 
   @override
@@ -35,9 +35,11 @@ class _HostelsListState extends State<HostelsList> {
     } catch (e) {
       print(e);
     }
+
+
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<Hostels>(context, listen: false)
-          .fetchAndSetHostels()
+      Provider.of<Shops>(context, listen: false)
+          .fetchAndSetShops()
           .then((value) {
         setState(() {
           showSpinner = false;
@@ -108,34 +110,32 @@ class _HostelsListState extends State<HostelsList> {
 
   @override
   Widget build(BuildContext context) {
-    var details = Provider.of<Hostels>(context).hostels;
-
-    List<Widget> getHostels() {
-      List<Widget>  Hostels = [];
+    var details = Provider.of<Shops>(context).shops;
+    List<Widget> getShops() {
+      List<Widget> Shops = [];
+      print(details);
       for (int i = 0; i < details.length; i++) {
-        Hostels.add(HostelDetailCard(details[i].imageUrl, details[i].hostelName,
-            details[i].description));
+        Shops.add(ShopCard(details[i]));
       }
-      return Hostels;
+      return Shops;
     }
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hostels"),
+        title: Text("Shops"),
       ),
       // navigation drawer
       body: Container(
           padding: EdgeInsets.only(bottom: 50),
           child: showSpinner
               ? Center(
-                  child: SpinKitWave(
-                  color: Colors.blue,
-                ))
+              child: SpinKitWave(
+                color: Colors.blue,
+              ))
               : SingleChildScrollView(
-                  child: Column(
-                    children: getHostels(),
-                  ),
-                )),
+            child: Column(
+              children: getShops(),
+            ),
+          )),
     );
   }
 }

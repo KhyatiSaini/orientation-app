@@ -1,19 +1,20 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/providers/hostels.dart';
+import 'package:orientation_app/providers/clubs.dart';
+import 'package:orientation_app/widgets/Club_Card.dart';
 import 'package:provider/provider.dart';
 import '../widgets/hostel_detail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../utilities/admanager.dart';
 
-class HostelsList extends StatefulWidget {
-  static String route = "/hostels";
+class ClubsScreen extends StatefulWidget {
+  static String route = "/club";
 
   @override
-  _HostelsListState createState() => _HostelsListState();
+  _ClubsScreenState createState() => _ClubsScreenState();
 }
 
-class _HostelsListState extends State<HostelsList> {
+class _ClubsScreenState extends State<ClubsScreen> {
   bool showSpinner = true;
   BannerAd myBanner;
 
@@ -21,6 +22,7 @@ class _HostelsListState extends State<HostelsList> {
   // ignore: must_call_super
   void dispose() {
     myBanner.dispose();
+    super.dispose();
   }
 
   @override
@@ -36,8 +38,8 @@ class _HostelsListState extends State<HostelsList> {
       print(e);
     }
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<Hostels>(context, listen: false)
-          .fetchAndSetHostels()
+      Provider.of<Clubs>(context, listen: false)
+          .fetchAndSetClubs()
           .then((value) {
         setState(() {
           showSpinner = false;
@@ -108,20 +110,17 @@ class _HostelsListState extends State<HostelsList> {
 
   @override
   Widget build(BuildContext context) {
-    var details = Provider.of<Hostels>(context).hostels;
-
-    List<Widget> getHostels() {
-      List<Widget>  Hostels = [];
+    var details = Provider.of<Clubs>(context).clubs;
+    List<Widget> getClubs() {
+      List<Widget> Clubs = [];
       for (int i = 0; i < details.length; i++) {
-        Hostels.add(HostelDetailCard(details[i].imageUrl, details[i].hostelName,
-            details[i].description));
+        Clubs.add(ClubCard(details[i]));
       }
-      return Hostels;
+      return Clubs;
     }
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hostels"),
+        title: Text("Clubs"),
       ),
       // navigation drawer
       body: Container(
@@ -133,7 +132,7 @@ class _HostelsListState extends State<HostelsList> {
                 ))
               : SingleChildScrollView(
                   child: Column(
-                    children: getHostels(),
+                    children: getClubs(),
                   ),
                 )),
     );

@@ -1,19 +1,19 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/providers/hostels.dart';
-import 'package:provider/provider.dart';
-import '../widgets/hostel_detail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../utilities/admanager.dart';
+import 'package:orientation_app/providers/Sports.dart';
+import 'package:orientation_app/utilities/admanager.dart';
+import 'package:orientation_app/widgets/sport_card.dart';
+import 'package:provider/provider.dart';
 
-class HostelsList extends StatefulWidget {
-  static String route = "/hostels";
+class SportsScreen extends StatefulWidget {
+  static String route = "/sports";
 
   @override
-  _HostelsListState createState() => _HostelsListState();
+  _SportsScreenState createState() => _SportsScreenState();
 }
 
-class _HostelsListState extends State<HostelsList> {
+class _SportsScreenState extends State<SportsScreen> {
   bool showSpinner = true;
   BannerAd myBanner;
 
@@ -36,8 +36,8 @@ class _HostelsListState extends State<HostelsList> {
       print(e);
     }
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<Hostels>(context, listen: false)
-          .fetchAndSetHostels()
+      Provider.of<Sports>(context, listen: false)
+          .fetchAndSetSports()
           .then((value) {
         setState(() {
           showSpinner = false;
@@ -108,20 +108,20 @@ class _HostelsListState extends State<HostelsList> {
 
   @override
   Widget build(BuildContext context) {
-    var details = Provider.of<Hostels>(context).hostels;
+    var details = Provider.of<Sports>(context).sports;
 
-    List<Widget> getHostels() {
-      List<Widget>  Hostels = [];
+    List<Widget> getSports() {
+      List<Widget> Sports = [];
       for (int i = 0; i < details.length; i++) {
-        Hostels.add(HostelDetailCard(details[i].imageUrl, details[i].hostelName,
-            details[i].description));
+        Sports.add(SportCard(
+            details[i].imageUrl, details[i].sportName, details[i].description));
       }
-      return Hostels;
+      return Sports;
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hostels"),
+        title: Text("Sports at Nit Hamirpur"),
       ),
       // navigation drawer
       body: Container(
@@ -133,7 +133,7 @@ class _HostelsListState extends State<HostelsList> {
                 ))
               : SingleChildScrollView(
                   child: Column(
-                    children: getHostels(),
+                    children: getSports(),
                   ),
                 )),
     );

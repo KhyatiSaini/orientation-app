@@ -5,7 +5,7 @@ class PlaceToVisit {
   final String placeName;
   final String description;
   final String imageUrl;
-  final double distance;
+  final int distance;
 
   PlaceToVisit(
       {@required this.id,

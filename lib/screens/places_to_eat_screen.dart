@@ -1,19 +1,17 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/providers/hostels.dart';
-import 'package:provider/provider.dart';
-import '../widgets/hostel_detail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../utilities/admanager.dart';
-
-class HostelsList extends StatefulWidget {
-  static String route = "/hostels";
-
+import 'package:orientation_app/providers/placestoeat.dart';
+import 'package:orientation_app/utilities/admanager.dart';
+import 'package:orientation_app/widgets/places_to_eat_card.dart';
+import 'package:provider/provider.dart';
+class PlacesToEatScreen extends StatefulWidget {
+  static String route = "/places_to_eat";
   @override
-  _HostelsListState createState() => _HostelsListState();
+  _PlacesToEatScreenState createState() => _PlacesToEatScreenState();
 }
 
-class _HostelsListState extends State<HostelsList> {
+class _PlacesToEatScreenState extends State<PlacesToEatScreen> {
   bool showSpinner = true;
   BannerAd myBanner;
 
@@ -36,8 +34,8 @@ class _HostelsListState extends State<HostelsList> {
       print(e);
     }
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<Hostels>(context, listen: false)
-          .fetchAndSetHostels()
+      Provider.of<PlacesToEat>(context, listen: false)
+          .fetchAndSetPlaceToEat()
           .then((value) {
         setState(() {
           showSpinner = false;
@@ -108,12 +106,12 @@ class _HostelsListState extends State<HostelsList> {
 
   @override
   Widget build(BuildContext context) {
-    var details = Provider.of<Hostels>(context).hostels;
+    var details = Provider.of<PlacesToEat>(context).placesToEat;
 
     List<Widget> getHostels() {
       List<Widget>  Hostels = [];
       for (int i = 0; i < details.length; i++) {
-        Hostels.add(HostelDetailCard(details[i].imageUrl, details[i].hostelName,
+        Hostels.add(PlacesToEatCard(details[i].imageUrl, details[i].foodCourtName,
             details[i].description));
       }
       return Hostels;
@@ -121,21 +119,21 @@ class _HostelsListState extends State<HostelsList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hostels"),
+        title: Text("Places To Eat"),
       ),
       // navigation drawer
       body: Container(
           padding: EdgeInsets.only(bottom: 50),
           child: showSpinner
               ? Center(
-                  child: SpinKitWave(
-                  color: Colors.blue,
-                ))
+              child: SpinKitWave(
+                color: Colors.blue,
+              ))
               : SingleChildScrollView(
-                  child: Column(
-                    children: getHostels(),
-                  ),
-                )),
+            child: Column(
+              children: getHostels(),
+            ),
+          )),
     );
   }
 }
