@@ -3,7 +3,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:orientation_app/screens/college_map_screen.dart';
-import 'package:orientation_app/screens/navigation_screen.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
 import '../widgets/appbar.dart';
 
@@ -23,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Container(),
     NithMapScreen(),
     Container(),
-    NavigationScreen(),
+    Container(),
     Container()
   ];
 
