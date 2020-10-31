@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:orientation_app/screens/chat.dart';
 import 'package:orientation_app/screens/college_map_screen.dart';
 import 'package:orientation_app/screens/image_upload_screen.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
@@ -28,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen>
     NithMapScreen(),
     ImageUploadScreen(),
     Container(),
-    Container()
+    ChatWidget()
   ];
   TabController _tabController;
 
@@ -63,15 +65,17 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: key,
       appBar: appbar,
       backgroundColor: Colors.white,
       drawer: AppDrawer(email, username),
-      body: TabBarView(children: _children, controller: _tabController),
+      body: TabBarView(
+        children: _children,
+        controller: _tabController,
+        physics: NeverScrollableScrollPhysics()
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.blue,
         backgroundColor: Colors.transparent,
@@ -81,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen>
           Icon(Icons.map, size: 30, color: Colors.white),
           Icon(Icons.camera, size: 30, color: Colors.white),
           Icon(Icons.explore, size: 30, color: Colors.white),
-          Icon(Icons.calendar_today_rounded, size: 30, color: Colors.white),
+          Icon(Icons.message, size: 30, color: Colors.white),
         ],
         animationCurve: Curves.bounceInOut,
         animationDuration: Duration(

@@ -1,20 +1,19 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/providers/clubs.dart';
-import 'package:orientation_app/widgets/Club_Card.dart';
-import 'package:provider/provider.dart';
-import '../widgets/hostel_detail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../utilities/admanager.dart';
+import 'package:orientation_app/utilities/admanager.dart';
+import 'package:orientation_app/widgets/place_to_visit_card.dart';
+import 'package:provider/provider.dart';
+import '../providers/placestovisit.dart';
 
-class ClubsScreen extends StatefulWidget {
-  static String route = "/club";
+class PlacesToVisitScreen extends StatefulWidget {
+  static String route = "/placestovisit";
 
   @override
-  _ClubsScreenState createState() => _ClubsScreenState();
+  _PlacesToVisitScreenState createState() => _PlacesToVisitScreenState();
 }
 
-class _ClubsScreenState extends State<ClubsScreen> {
+class _PlacesToVisitScreenState extends State<PlacesToVisitScreen> {
   bool showSpinner = true;
   BannerAd myBanner;
 
@@ -22,7 +21,6 @@ class _ClubsScreenState extends State<ClubsScreen> {
   // ignore: must_call_super
   void dispose() {
     myBanner.dispose();
-    super.dispose();
   }
 
   @override
@@ -38,8 +36,8 @@ class _ClubsScreenState extends State<ClubsScreen> {
       print(e);
     }
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<Clubs>(context, listen: false)
-          .fetchAndSetClubs()
+      Provider.of<PlacesToVisitProvider>(context, listen: false)
+          .fetchAndSetPlaceToVisit()
           .then((value) {
         setState(() {
           showSpinner = false;
@@ -110,17 +108,20 @@ class _ClubsScreenState extends State<ClubsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var details = Provider.of<Clubs>(context).clubs;
-    List<Widget> getClubs() {
-      List<Widget> Clubs = [];
+    var details = Provider.of<PlacesToVisitProvider>(context).placesToVisit;
+
+    List<Widget> getPlaces() {
+      List<Widget> Places = [];
       for (int i = 0; i < details.length; i++) {
-        Clubs.add(ClubCard(details[i]));
+        Places.add(PlaceToVisitCard(details[i].imageUrl, details[i].placeName,
+            details[i].description, details[i].distance));
       }
-      return Clubs;
+      return Places;
     }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Clubs"),
+        title: Text("Places To Visit"),
       ),
       // navigation drawer
       body: Container(
@@ -132,7 +133,7 @@ class _ClubsScreenState extends State<ClubsScreen> {
                 ))
               : SingleChildScrollView(
                   child: Column(
-                    children: getClubs(),
+                    children: getPlaces(),
                   ),
                 )),
     );

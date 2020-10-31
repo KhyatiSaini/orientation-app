@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:orientation_app/screens/Contributors.dart';
+import 'package:orientation_app/screens/PlacesToVisitScreen.dart';
 import 'package:orientation_app/screens/chat_screen.dart';
 import 'package:orientation_app/screens/places_to_eat_screen.dart';
+import 'package:orientation_app/screens/shops.dart';
 import '../screens/hostels_screen.dart';
 import '../screens/club_screen.dart';
 import '../screens/societies.dart';
@@ -55,44 +61,6 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
         ),
       ),
-      ListTile(
-        onTap: () {},
-        leading: CircleAvatar(child: Icon(Icons.camera)),
-        title: Text(
-          "Latest Posts",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {},
-        leading: CircleAvatar(child: Icon(Icons.event)),
-        title: Text(
-          "Events",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {
-          Navigator.pushNamed(context, ChatScreen.route);
-        },
-        leading: CircleAvatar(child: Icon(Icons.chat)),
-        title: Text(
-          "Chat Box",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {},
-        leading: CircleAvatar(child: Icon(Icons.school)),
-        title: Text(
-          "Departments",
-          style: style,
-        ),
-      ),
-      Divider(),
       ListTile(
         onTap: () {
           Navigator.pushNamed(context, ClubsScreen.route);
@@ -149,19 +117,58 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       Divider(),
       ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, PlacesToVisitScreen.route);
+        },
         leading: CircleAvatar(child: Icon(Icons.landscape)),
         title: Text(
-          "Places to visit",
+          "Places to Visit",
           style: style,
         ),
       ),
       Divider(),
       ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, ShopScreen.route);
+          },
           leading: CircleAvatar(child: Icon(Icons.store)),
           title: Text(
             "Shops",
+            style: style,
+          )),
+      Divider(),
+      ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, Contributors.route);
+          },
+          leading: CircleAvatar(child: Icon(Icons.supervised_user_circle)),
+          title: Text(
+            "Contributors",
+            style: style,
+          )),
+      Divider(),
+      ListTile(
+          onTap: () async {
+            FirebaseAuth.instance.signOut();
+            try {
+              GoogleSignIn _googleSignIn = GoogleSignIn();
+              await _googleSignIn.signOut();
+
+              Fluttertoast.showToast(
+                  msg: "Successfully Logged-Out",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.blue,
+                  fontSize: 16.0);
+            } catch (e) {
+              print(e);
+            }
+          },
+          leading: CircleAvatar(child: Icon(Icons.logout)),
+          title: Text(
+            "Logout",
             style: style,
           )),
       Divider()

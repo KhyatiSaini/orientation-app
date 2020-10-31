@@ -1,1 +1,3 @@
-const String baseUrl = "https://bcb9f255cda6.ngrok.io/data";
+const String baseUrl = "https://nithorientationapp.herokuapp.com/data";
+
+

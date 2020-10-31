@@ -56,28 +56,37 @@ class _ClubCardState extends State<ClubCard> {
                 new Padding(
                     padding: new EdgeInsets.all(7.0),
                     child: Text(widget.club.description)),
-                Divider(),
+                if (widget.club.president.id !=
+                        "894970c2-2923-4b45-8dda-a26f4b22eb53" ||
+                    widget.club.vicePresident.id !=
+                        "24c6274d-019e-466a-8822-b5deab6652f7")
+                  Divider(),
                 Row(
                   children: [
-                    Expanded(
-                      child: Container(
-                        child: Center(
-                          child: Text("President",
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 20)),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Center(
-                          child: Text(
-                            "Vice President",
-                            style: TextStyle(color: Colors.blue, fontSize: 20),
+                    if (widget.club.president.id !=
+                        "894970c2-2923-4b45-8dda-a26f4b22eb53")
+                      Expanded(
+                        child: Container(
+                          child: Center(
+                            child: Text("President",
+                                style: TextStyle(
+                                    color: Colors.blue, fontSize: 20)),
                           ),
                         ),
                       ),
-                    )
+                    if (widget.club.vicePresident.id !=
+                        "24c6274d-019e-466a-8822-b5deab6652f7")
+                      Expanded(
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              "Vice President",
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      )
                   ],
                 ),
                 Padding(
@@ -85,24 +94,28 @@ class _ClubCardState extends State<ClubCard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      CircleAvatar(
-                        child: CircleAvatar(
-                          maxRadius: 50,
-                          backgroundImage:
-                              NetworkImage(widget.club.president.imageUrl),
+                      if (widget.club.president.id !=
+                          "894970c2-2923-4b45-8dda-a26f4b22eb53")
+                        CircleAvatar(
+                          child: CircleAvatar(
+                            maxRadius: 50,
+                            backgroundImage:
+                                NetworkImage(widget.club.president.imageUrl),
+                          ),
+                          maxRadius: 53,
+                          backgroundColor: Colors.blue,
                         ),
-                        maxRadius: 53,
-                        backgroundColor: Colors.blue,
-                      ),
-                      CircleAvatar(
-                        child: CircleAvatar(
-                          maxRadius: 50,
-                          backgroundImage:
-                              NetworkImage(widget.club.vicePresident.imageUrl),
-                        ),
-                        maxRadius: 53,
-                        backgroundColor: Colors.blue,
-                      )
+                      if (widget.club.vicePresident.id !=
+                          "24c6274d-019e-466a-8822-b5deab6652f7")
+                        CircleAvatar(
+                          child: CircleAvatar(
+                            maxRadius: 50,
+                            backgroundImage: NetworkImage(
+                                widget.club.vicePresident.imageUrl),
+                          ),
+                          maxRadius: 53,
+                          backgroundColor: Colors.blue,
+                        )
                     ],
                   ),
                 ),
@@ -111,37 +124,41 @@ class _ClubCardState extends State<ClubCard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                                child: Text(
-                              widget.club.president.name,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w300),
+                      if (widget.club.president.id !=
+                          "894970c2-2923-4b45-8dda-a26f4b22eb53")
+                        Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                  child: Text(
+                                widget.club.president.name,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300),
+                              )),
                             )),
-                          )),
-                      Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text(widget.club.vicePresident.name,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300)),
-                            ),
-                          ))
+                      if (widget.club.vicePresident.id !=
+                          "24c6274d-019e-466a-8822-b5deab6652f7")
+                        Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text(widget.club.vicePresident.name,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300)),
+                              ),
+                            ))
                     ],
                   ),
                 ),
