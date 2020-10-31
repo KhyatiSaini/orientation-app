@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class HostelDetailCard extends StatefulWidget {
-  final String imageUrl;
-  final String title;
-  final String description;
+class PlaceToVisitCard extends StatefulWidget {
+  String imageUrl;
+  String name;
+  String description;
+  int distance;
 
-  HostelDetailCard(this.imageUrl, this.title, this.description);
+  PlaceToVisitCard(this.imageUrl, this.name, this.description, this.distance);
 
   @override
-  _HostelDetailCardState createState() => _HostelDetailCardState();
+  _PlaceToVisitCardState createState() => _PlaceToVisitCardState();
 }
 
-class _HostelDetailCardState extends State<HostelDetailCard> {
+class _PlaceToVisitCardState extends State<PlaceToVisitCard> {
   @override
-
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -43,9 +43,15 @@ class _HostelDetailCardState extends State<HostelDetailCard> {
                       ))
                 ],
               ),
-              new Text(
-                widget.title,
-                style: TextStyle(fontSize: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  new Text(
+                    widget.name,
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Chip(label: Text(widget.distance.toString() + " km"))
+                ],
               ),
               new Padding(
                   padding: new EdgeInsets.all(7.0),

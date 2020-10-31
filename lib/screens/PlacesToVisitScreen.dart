@@ -1,19 +1,19 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:orientation_app/providers/hostels.dart';
-import 'package:provider/provider.dart';
-import '../widgets/hostel_detail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import '../utilities/admanager.dart';
+import 'package:orientation_app/utilities/admanager.dart';
+import 'package:orientation_app/widgets/place_to_visit_card.dart';
+import 'package:provider/provider.dart';
+import '../providers/placestovisit.dart';
 
-class HostelsList extends StatefulWidget {
-  static String route = "/hostels";
+class PlacesToVisitScreen extends StatefulWidget {
+  static String route = "/placestovisit";
 
   @override
-  _HostelsListState createState() => _HostelsListState();
+  _PlacesToVisitScreenState createState() => _PlacesToVisitScreenState();
 }
 
-class _HostelsListState extends State<HostelsList> {
+class _PlacesToVisitScreenState extends State<PlacesToVisitScreen> {
   bool showSpinner = true;
   BannerAd myBanner;
 
@@ -36,8 +36,8 @@ class _HostelsListState extends State<HostelsList> {
       print(e);
     }
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<Hostels>(context, listen: false)
-          .fetchAndSetHostels()
+      Provider.of<PlacesToVisitProvider>(context, listen: false)
+          .fetchAndSetPlaceToVisit()
           .then((value) {
         setState(() {
           showSpinner = false;
@@ -108,20 +108,20 @@ class _HostelsListState extends State<HostelsList> {
 
   @override
   Widget build(BuildContext context) {
-    var details = Provider.of<Hostels>(context).hostels;
+    var details = Provider.of<PlacesToVisitProvider>(context).placesToVisit;
 
-    List<Widget> getHostels() {
-      List<Widget>  Hostels = [];
+    List<Widget> getPlaces() {
+      List<Widget> Places = [];
       for (int i = 0; i < details.length; i++) {
-        Hostels.add(HostelDetailCard(details[i].imageUrl, details[i].hostelName,
-            details[i].description));
+        Places.add(PlaceToVisitCard(details[i].imageUrl, details[i].placeName,
+            details[i].description, details[i].distance));
       }
-      return Hostels;
+      return Places;
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hostels"),
+        title: Text("Places To Visit"),
       ),
       // navigation drawer
       body: Container(
@@ -133,7 +133,7 @@ class _HostelsListState extends State<HostelsList> {
                 ))
               : SingleChildScrollView(
                   child: Column(
-                    children: getHostels(),
+                    children: getPlaces(),
                   ),
                 )),
     );

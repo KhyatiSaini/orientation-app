@@ -1,26 +1,27 @@
-import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart';
 import 'dart:convert';
-import 'package:orientation_app/classes/hostel.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:orientation_app/utilities/constants.dart';
 
-class Hostels extends ChangeNotifier {
-  List<Hostel> _hostels = [];
+import '../classes/shop.dart';
 
-  List<Hostel> get hostels => [..._hostels];
+class Shops extends ChangeNotifier {
+  List<Shop> _shops = [];
 
-  Future<void> fetchAndSetHostels() async {
+  List<Shop> get shops => [..._shops];
+
+  Future<void> fetchAndSetShops() async {
     try {
-      final String url = baseUrl + "/hostels/?format=json";
+      final String url = baseUrl + "/shops/?format=json";
       print(url);
       Response response = await get(url);
       List data = json.decode(response.body);
-      _hostels = [];
+      _shops = [];
       if (response.statusCode == 200) {
         for (int i = 0; i < data.length; i++) {
-          _hostels.add(Hostel(
+          _shops.add(Shop(
               id: data[i]["id"],
-              hostelName: data[i]["HostelName"],
+              shopName: data[i]["ShopName"],
               imageUrl: data[i]["imageUrl"],
               description: data[i]["description"]));
         }

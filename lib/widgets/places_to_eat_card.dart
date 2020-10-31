@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class HostelDetailCard extends StatefulWidget {
+class PlacesToEatCard extends StatefulWidget {
   final String imageUrl;
   final String title;
   final String description;
 
-  HostelDetailCard(this.imageUrl, this.title, this.description);
+  PlacesToEatCard(this.imageUrl, this.title, this.description);
 
   @override
-  _HostelDetailCardState createState() => _HostelDetailCardState();
+  _PlacesToEatCardState createState() => _PlacesToEatCardState();
 }
 
-class _HostelDetailCardState extends State<HostelDetailCard> {
+class _PlacesToEatCardState extends State<PlacesToEatCard> {
   @override
-
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -48,7 +47,7 @@ class _HostelDetailCardState extends State<HostelDetailCard> {
                 style: TextStyle(fontSize: 30),
               ),
               new Padding(
-                  padding: new EdgeInsets.all(7.0),
+                  padding: new EdgeInsets.all(15.0),
                   child: Text(widget.description))
             ],
           ),

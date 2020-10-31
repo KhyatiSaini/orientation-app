@@ -12,6 +12,7 @@ class Location {
       location['accuracy'] = position.accuracy;
     } catch (e) {
       location['error'] = e;
+      throw Exception();
     }
 
     return location;
@@ -28,6 +29,7 @@ class Location {
       location['accuracy'] = position.accuracy;
     } catch (e) {
       location['error'] = e;
+      throw Exception();
     }
     return location;
   }
