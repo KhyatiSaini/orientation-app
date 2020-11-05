@@ -47,11 +47,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
       _showGoogleMap = true;
       latLng = LatLng(lat, lng);
 
-      googleMapController.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(target: LatLng(lat, lng), zoom: 16),
-        ),
-      );
+      // googleMapController.animateCamera(
+      //   CameraUpdate.newCameraPosition(
+      //     CameraPosition(target: LatLng(lat, lng), zoom: 16),
+      //   ),
+      // );
     });
   }
 
