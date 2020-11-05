@@ -1,16 +1,59 @@
-# orientation_app
+# Orientation App
+A flutter application that will be like a companion for the freshers to get to know about the college, different clubs and socities here and many more things, and connect with batchmates and seniors via this app.
 
-A new Flutter project.
+## User Authentication
 
-## Getting Started
+## Backend - Firestore and Django
+[Firestore](https://firebase.google.com/products/firestore) and [Django application](https://github.com/spiderxm/Orientation_app_backend) is used as backend for this application.
 
-This project is a starting point for a Flutter application.
+## Maps Section
 
-A few resources to get you started if this is your first Flutter project:
+## Using Google Maps
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- To use Google Maps, a flutter plugin needs to be added as dependency in the ```pubspec.yaml``` file.
+```
+  dependencies:
+    google_maps_flutter: ^0.5.27+3
+```
+- Get an API key at [https://cloud.google.com/maps-platform/](https://cloud.google.com/maps-platform/)
+- <b>For Android</b>, Specify the API key in the android manifest ```android/app/src/main/AndroidManifest.xml```
+```
+  <manifest ...
+    <application ...
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
+```            
+- <b>For iOS</b>, Specify the API key in the application delegate ```ios/Runner/AppDelegate.m```
+```
+  #include "AppDelegate.h"  
+  #include "GeneratedPluginRegistrant.h"
+  #import "GoogleMaps/GoogleMaps.h"
+
+  @implementation AppDelegate
+
+  - (BOOL)application:(UIApplication *)application
+      didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [GMSServices provideAPIKey:@"YOUR KEY HERE"];
+    [GeneratedPluginRegistrant registerWithRegistry:self];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  }
+  @end
+```
+- Usage
+```
+ GoogleMap(
+     mapType: MapType.normal,
+     initialCameraPosition: _kGooglePlex,
+     onMapCreated: (GoogleMapController controller) {
+     _controller.complete(controller);
+   },
+ ),
+```     
+
+<strong>For more information refer</strong> [https://pub.dev/packages/google_maps_flutter](https://pub.dev/packages/google_maps_flutter)
+
+## Other Sections
+
+## Contributors Section
