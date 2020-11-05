@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class Location {
@@ -32,5 +34,11 @@ class Location {
       throw Exception();
     }
     return location;
+  }
+
+  Future<Position> getPosition(String location) async {
+    Position positionStream;
+    positionStream = (await GeocodingPlatform.instance.locationFromAddress(location)) as Position;
+    return positionStream;
   }
 }
