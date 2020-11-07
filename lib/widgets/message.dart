@@ -58,7 +58,7 @@ class _MessageState extends State<Message> {
       hour = (date.hour - 12).toString();
       stamp = "pm";
     } else {
-      hour = date.minute.toString();
+      hour = date.hour.toString();
       stamp = "am";
     }
     minute = date.minute.toString();

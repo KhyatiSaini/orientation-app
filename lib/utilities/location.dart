@@ -7,6 +7,7 @@ class Location {
     Map location = new Map();
     try {
       Position position =
+          // ignore: deprecated_member_use
           await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       location['latitude'] = position.latitude;
       location['longitude'] = position.longitude;
