@@ -98,14 +98,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Container(
                 margin: EdgeInsets.only(top: 20),
-                child: Text('lorem ipsum dolor sit amet',
+                child: Text('Hey there! let\'s go for virtual college trip',
                     style: TextStyle(
                         fontSize: 15.0,
                         fontWeight: FontWeight.normal,
                         color: Colors.white))),
             Container(
                 margin: EdgeInsets.only(top: 10),
-                child: Text('lorem ipsum dolor sit amet',
+                child: Text('Explore. Connect. Learn. Enjoy',
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,

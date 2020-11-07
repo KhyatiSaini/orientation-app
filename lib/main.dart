@@ -12,6 +12,7 @@ import 'package:orientation_app/providers/socities.dart';
 import 'package:orientation_app/screens/Contributors.dart';
 import 'package:orientation_app/screens/places_to_eat_screen.dart';
 import 'package:orientation_app/screens/shops.dart';
+import 'package:orientation_app/screens/splash_screen.dart';
 import 'package:orientation_app/screens/sports_screen.dart';
 import 'authentication/Signin.dart';
 import 'screens/welcome_screen.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
             }
           },
         ),
-        title: 'Pyschic Fresher',
+        title: 'Psychic Fresher',
         routes: {
           WelcomeScreen.route: (context) => WelcomeScreen(),
           SignUp.route: (context) => SignUp(),
@@ -78,7 +79,8 @@ class MyApp extends StatelessWidget {
           PlacesToEatScreen.route: (context) => PlacesToEatScreen(),
           Contributors.route: (context)=>Contributors(),
           PlacesToVisitScreen.route: (context) => PlacesToVisitScreen(),
-          ShopScreen.route: (context) => ShopScreen()
+          ShopScreen.route: (context) => ShopScreen(),
+          SplashScreen.route: (context) => SplashScreen(),
         },
       ),
     );
