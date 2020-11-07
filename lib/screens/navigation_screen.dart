@@ -71,7 +71,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
       print('$_startingAddress');
     } catch (e) {
       print(e);
-      print(71);
       Exception();
     }
   }
@@ -147,8 +146,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
         double totalDistance = 0.0;
 
-        // Calculating the total distance by adding the distance
-        // between small segments
         for (int i = 0; i < polylineCoordinates.length - 1; i++) {
           totalDistance += _coordinateDistance(
             polylineCoordinates[i].latitude,
@@ -185,19 +182,21 @@ class _NavigationScreenState extends State<NavigationScreen> {
   // Creating polylines for showing the route between two places
   _createPolylines(Position start, Position destination) async {
     polylinePoints = PolylinePoints();
-
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      GOOGLE_API_KEY, // Google Maps API Key
-      PointLatLng(start.latitude, start.longitude),
-      PointLatLng(destination.latitude, destination.longitude),
-      travelMode: TravelMode.transit,
-    );
-
-    // Adding the coordinates to the list
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+    try {
+      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        GOOGLE_API_KEY, // Google Maps API Key
+        PointLatLng(start.latitude, start.longitude),
+        PointLatLng(destination.latitude, destination.longitude),
+        travelMode: TravelMode.driving ,
+      );
+      // Adding the coordinates to the list
+      if (result.points.isNotEmpty) {
+        result.points.forEach((PointLatLng point) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        });
+      }
+    } catch (e) {
+      print(e);
     }
 
     // Defining an ID
