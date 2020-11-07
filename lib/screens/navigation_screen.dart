@@ -48,11 +48,14 @@ class _NavigationScreenState extends State<NavigationScreen> {
       _showGoogleMap = true;
       latLng = LatLng(lat, lng);
 
-      // googleMapController.animateCamera(
-      //   CameraUpdate.newCameraPosition(
-      //     CameraPosition(target: LatLng(lat, lng), zoom: 16),
-      //   ),
-      // );
+      if (googleMapController != null)
+      {
+         googleMapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(target: LatLng(lat, lng), zoom: 16),
+          ),
+        );
+      }
     });
     _getAddress();
   }
@@ -82,7 +85,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
         Position startPosition = await location.getPosition(_startingAddress);
         Position destinationPosition =
             await location.getPosition(_destinationAddress);
-        print('done');
         // starting position marker
         Marker startMarker = Marker(
           markerId: MarkerId('$startPosition'),
@@ -117,28 +119,32 @@ class _NavigationScreenState extends State<NavigationScreen> {
         print('Start coordinates: $startPosition');
         print('Destination coordinates: $destinationPosition');
 
-        Position _northWestCoordinates, _southWestCoordinates;
-        if (startPosition.latitude <= destinationPosition.latitude) {
-          _southWestCoordinates = startPosition;
-          _northWestCoordinates = destinationPosition;
+        LatLngBounds latLngBounds;
+        if (startPosition.latitude < destinationPosition.latitude && startPosition.longitude < destinationPosition.longitude) {
+          latLngBounds = LatLngBounds(
+            southwest: LatLng(startPosition.latitude, startPosition.longitude),
+            northeast: LatLng(destinationPosition.latitude, destinationPosition.longitude),
+          );
+        } else if (startPosition.longitude < destinationPosition.longitude) {
+          latLngBounds = LatLngBounds(
+            southwest: LatLng(destinationPosition.latitude, startPosition.longitude),
+            northeast: LatLng(startPosition.latitude, destinationPosition.longitude)
+          );
+        } else if (startPosition.latitude < destinationPosition.latitude) {
+          latLngBounds = LatLngBounds(
+            southwest: LatLng(startPosition.latitude, destinationPosition.longitude),
+            northeast: LatLng(destinationPosition.latitude, startPosition.longitude)
+          );
         } else {
-          _southWestCoordinates = destinationPosition;
-          _northWestCoordinates = startPosition;
+          latLngBounds = LatLngBounds(
+              southwest: LatLng(destinationPosition.latitude, destinationPosition.longitude),
+              northeast: LatLng(startPosition.latitude, startPosition.longitude));
         }
 
         // accommodate the two locations within the camera view of map
         googleMapController.animateCamera(
           CameraUpdate.newLatLngBounds(
-              LatLngBounds(
-                southwest: LatLng(
-                  _southWestCoordinates.latitude,
-                  _southWestCoordinates.longitude,
-                ),
-                northeast: LatLng(
-                  _northWestCoordinates.latitude,
-                  _northWestCoordinates.longitude,
-                ),
-              ),
+              latLngBounds,
               100.0),
         );
 
@@ -146,6 +152,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
         double totalDistance = 0.0;
 
+        // Calculating the total distance by adding the distance
+        // between small segments
         for (int i = 0; i < polylineCoordinates.length - 1; i++) {
           totalDistance += _coordinateDistance(
             polylineCoordinates[i].latitude,
@@ -156,14 +164,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
         }
 
         setState(() {
-          _distance = totalDistance.toStringAsFixed(2);
+          _distance = totalDistance.toString();
           print('DISTANCE: $_distance km');
         });
         return true;
       }
     } catch (e) {
-      print('not done');
-      print(166);
       print(e);
       Exception();
     }
@@ -182,21 +188,19 @@ class _NavigationScreenState extends State<NavigationScreen> {
   // Creating polylines for showing the route between two places
   _createPolylines(Position start, Position destination) async {
     polylinePoints = PolylinePoints();
-    try {
-      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        GOOGLE_API_KEY, // Google Maps API Key
-        PointLatLng(start.latitude, start.longitude),
-        PointLatLng(destination.latitude, destination.longitude),
-        travelMode: TravelMode.driving ,
-      );
-      // Adding the coordinates to the list
-      if (result.points.isNotEmpty) {
-        result.points.forEach((PointLatLng point) {
-          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-        });
-      }
-    } catch (e) {
-      print(e);
+
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      GOOGLE_API_KEY, // Google Maps API Key
+      PointLatLng(start.latitude, start.longitude),
+      PointLatLng(destination.latitude, destination.longitude),
+      travelMode: TravelMode.driving,
+    );
+
+    // Adding the coordinates to the list
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
     }
 
     // Defining an ID
@@ -327,8 +331,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 Text(
                                   'Places',
                                   style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey,
+                                      fontSize: 18,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(height: 10),
