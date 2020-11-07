@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:orientation_app/screens/chat.dart';
 import 'package:orientation_app/screens/college_map_screen.dart';
 import 'package:orientation_app/screens/image_upload_screen.dart';
+import 'package:orientation_app/screens/navigation_screen.dart';
 import 'package:orientation_app/widgets/Drawer.dart';
 import '../widgets/appbar.dart';
 import 'feed.dart';
@@ -29,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen>
     UserPostsFeed(),
     NithMapScreen(),
     ImageUploadScreen(),
-    Container(),
-    ChatWidget()
+    NavigationScreen(),
+    ChatWidget(),
   ];
   TabController _tabController;
 

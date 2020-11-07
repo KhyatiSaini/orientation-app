@@ -8,7 +8,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:icon="@mipmap/launcher_icon"
-        android:label="orientation_app">
+        android:label="NIT-H">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD8mV2YNOuiucoiS39ARdXxbg8Rv7fSu9U" />
@@ -35,6 +35,7 @@
             <meta-data
                 android:name="io.flutter.embedding.android.SplashScreenDrawable"
                 android:resource="@drawable/launch_background" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

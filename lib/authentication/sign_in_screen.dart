@@ -332,7 +332,7 @@ class _signInState extends State<signIn> {
                                         SizedBox(height: 30),
                                         Container(
                                           padding: EdgeInsets.symmetric(
-                                              vertical: 0, horizontal: 70),
+                                              vertical: 0, horizontal: 60),
                                           child: Row(
                                             children: [
                                               Text('Already have an account? ',
