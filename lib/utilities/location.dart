@@ -7,6 +7,7 @@ class Location {
     Map location = new Map();
     try {
       Position position =
+          // ignore: deprecated_member_use
           await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       location['latitude'] = position.latitude;
       location['longitude'] = position.longitude;
@@ -38,7 +39,10 @@ class Location {
 
   Future<Position> getPosition(String location) async {
     Position positionStream;
-    positionStream = (await GeocodingPlatform.instance.locationFromAddress(location)) as Position;
+    var list = await GeocodingPlatform.instance.locationFromAddress(location);
+    print(list);
+    positionStream =
+        Position(latitude: list[0].latitude, longitude: list[0].longitude);
     return positionStream;
   }
 }
