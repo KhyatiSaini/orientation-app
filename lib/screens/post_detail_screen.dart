@@ -21,7 +21,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   String address = '';
 
   String getTime(DateTime date) {
+    date = date.add(new Duration(minutes: 30, hours: 5));
     var hour, minute, stamp;
+    print(date.toString());
     if (date.hour >= 12) {
       hour = (date.hour - 12).toString();
       stamp = "pm";
@@ -41,7 +43,6 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   Widget build(BuildContext context) {
     String UserIcon() {
       List<String> name = widget.post.userName.split(" ");
-      print(name);
       String a = "";
       for (String n in name) {
         a = a + n[0];
@@ -86,13 +87,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     ),
                   ),
                   title: Text(widget.post.userName),
-                  subtitle: Text(dateTime.day.toString() +
-                      '/' +
-                      dateTime.month.toString() +
-                      '/' +
-                      dateTime.year.toString() +
-                      '  ' +
-                      getTime(dateTime), style: TextStyle(color: Colors.black87,),),
+                  subtitle: Text(
+                      dateTime.day.toString() +
+                          '/' +
+                          dateTime.month.toString() +
+                          '/' +
+                          dateTime.year.toString() +
+                          '  ' +
+                          getTime(dateTime),
+                      style: TextStyle(color: Colors.black87)),
                 )),
               ),
               Padding(
@@ -154,10 +157,9 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.all(18),
                   child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.grey[300]
-                    ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.grey[300]),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text("Location : " + address),
