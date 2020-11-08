@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:orientation_app/utilities/location.dart';
@@ -21,14 +22,20 @@ class _NavigationScreenState extends State<NavigationScreen> {
   bool _showGoogleMap = false;
   LatLng latLng;
   final TextEditingController startAddressController = TextEditingController();
-  final TextEditingController destinationAddressController =
-      TextEditingController();
+  final TextEditingController destinationAddressController = TextEditingController();
   String _startingAddress, _destinationAddress, _currentAddress, _distance;
   Set<Marker> markers = {};
   PolylinePoints polylinePoints;
   Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
   final _key = GlobalKey<ScaffoldState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    startAddressController.dispose();
+    destinationAddressController.dispose();
+  }
 
   @override
   void initState() {
@@ -69,7 +76,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       _currentAddress = result;
       setState(() {
         _startingAddress = result;
-        // startAddressController.text = result;
+        startAddressController.text = result;
       });
       print('$_startingAddress');
     } catch (e) {
@@ -81,6 +88,9 @@ class _NavigationScreenState extends State<NavigationScreen> {
   Future<bool> _calculateDistance() async {
     Location location = new Location();
     try {
+      if (_startingAddress == null && _destinationAddress == null)
+        return false;
+
       if (_startingAddress != null && _destinationAddress != null) {
         Position startPosition = await location.getPosition(_startingAddress);
         Position destinationPosition =
@@ -164,9 +174,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
         }
 
         setState(() {
-          _distance = totalDistance.toString();
+          _distance = totalDistance.toStringAsFixed(2);
           print('DISTANCE: $_distance km');
         });
+
+        if (_startingAddress.compareTo(_destinationAddress) != 0 && _distance.compareTo("0.00") == 0)
+          return false;
         return true;
       }
     } catch (e) {
@@ -420,7 +433,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 ),
                                 SizedBox(height: 10),
                                 Visibility(
-                                  visible: _distance == null ? false : true,
+                                  visible: (_distance == null || _distance.compareTo("0.00") == 0) ? false : true,
                                   child: Text(
                                     'DISTANCE: $_distance km',
                                     style: TextStyle(
@@ -431,36 +444,40 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 ),
                                 SizedBox(height: 10),
                                 RaisedButton(
-                                  onPressed: (_startingAddress != '' &&
-                                          _destinationAddress != '')
-                                      ? () async {
-                                          setState(() {
-                                            if (markers.isNotEmpty)
-                                              markers.clear();
-                                            if (polylines.isNotEmpty)
-                                              polylines.clear();
-                                            if (polylineCoordinates.isNotEmpty)
-                                              polylineCoordinates.clear();
-                                            _distance = null;
-                                          });
+                                  onPressed: (_startingAddress == '' && _destinationAddress == '') ?
+                                  () => Fluttertoast.showToast(
+                                      msg: 'Please enter starting and destination address',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.white,
+                                      textColor: Colors.blue,
+                                      fontSize: 16.0
+                                  ) : () async {
+                                    setState(() {
+                                      if (markers.isNotEmpty)
+                                        markers.clear();
+                                      if (polylines.isNotEmpty)
+                                        polylines.clear();
+                                      if (polylineCoordinates.isNotEmpty)
+                                        polylineCoordinates.clear();
+                                      _distance = null;
+                                    });
 
-                                          _calculateDistance()
-                                              .then((distanceCalculated) {
-                                            if (distanceCalculated) {
-                                              Scaffold.of(context).showSnackBar(
-                                                SnackBar(
-                                                    content: Text(
-                                                        'Distance Calculated')),
-                                              );
-                                            } else {
-                                              Scaffold.of(context).showSnackBar(
-                                                  SnackBar(
-                                                      content: Text(
-                                                          'Error Calculating Distance')));
-                                            }
-                                          });
-                                        }
-                                      : null,
+                                    _calculateDistance()
+                                        .then((value) {
+                                          if (!value) {
+                                            Scaffold.of(context).showSnackBar(
+                                              SnackBar(content: Text('Error Calculating Distance'))
+                                            );
+                                          }
+                                          else {
+                                            Scaffold.of(context).showSnackBar(
+                                              SnackBar(content: Text('Distance Calculated Successfully'))
+                                            );
+                                          }
+                                    });
+                                  },
                                   color: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
