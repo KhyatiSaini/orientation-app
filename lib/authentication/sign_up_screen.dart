@@ -94,26 +94,26 @@ class _SignUpPage extends State<SignUp> {
         child: Scaffold(
             backgroundColor: Colors.blue,
             body: Builder(
-              builder: (context) => SingleChildScrollView(
+              builder: (context) => Container(
+                height: MediaQuery.of(context).size.height * 1,
+                // child: SingleChildScrollView(
                 child: Container(
-                    padding: null,
-                    margin: null,
-                    // height: MediaQuery.of(context).size.height,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    height: MediaQuery.of(context).size.height * 1,
+                    child: ListView(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Stack(
                           children: [
-                            Container(
-                                padding: EdgeInsets.only(top: 20, left: 10),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: Icon(Icons.arrow_back,
-                                      color: Colors.white, size: 28),
-                                )),
+                            // Positioned(
+                            //     left: 10,
+                            //     top: 10,
+                            //     child: MaterialButton(
+                            //       onPressed: () {
+                            //         Navigator.of(context).pop();
+                            //       },
+                            //       child: Icon(Icons.arrow_back),
+                            //     )),
                             SizedBox(height: 20),
                             Container(
                               alignment: Alignment.topLeft,
@@ -135,7 +135,6 @@ class _SignUpPage extends State<SignUp> {
                             Container(
                                 margin: EdgeInsets.only(top: 180),
                                 width: double.infinity,
-                                height: 700,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.only(
@@ -565,7 +564,8 @@ class _SignUpPage extends State<SignUp> {
                                                                       .bold,
                                                               fontSize: 15)),
                                                     ),
-                                                  )
+                                                  ),
+                                                  SizedBox(height: 30),
                                                 ],
                                               ),
                                             ),
@@ -576,6 +576,7 @@ class _SignUpPage extends State<SignUp> {
                           ],
                         ),
                       ],
+                      // ),
                     )),
               ),
             )));
