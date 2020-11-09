@@ -48,9 +48,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
       _showGoogleMap = true;
       latLng = LatLng(lat, lng);
 
-      if (googleMapController != null)
-      {
-         googleMapController.animateCamera(
+      if (googleMapController != null) {
+        googleMapController.animateCamera(
           CameraUpdate.newCameraPosition(
             CameraPosition(target: LatLng(lat, lng), zoom: 16),
           ),
@@ -120,32 +119,36 @@ class _NavigationScreenState extends State<NavigationScreen> {
         print('Destination coordinates: $destinationPosition');
 
         LatLngBounds latLngBounds;
-        if (startPosition.latitude < destinationPosition.latitude && startPosition.longitude < destinationPosition.longitude) {
+        if (startPosition.latitude < destinationPosition.latitude &&
+            startPosition.longitude < destinationPosition.longitude) {
           latLngBounds = LatLngBounds(
             southwest: LatLng(startPosition.latitude, startPosition.longitude),
-            northeast: LatLng(destinationPosition.latitude, destinationPosition.longitude),
+            northeast: LatLng(
+                destinationPosition.latitude, destinationPosition.longitude),
           );
         } else if (startPosition.longitude < destinationPosition.longitude) {
           latLngBounds = LatLngBounds(
-            southwest: LatLng(destinationPosition.latitude, startPosition.longitude),
-            northeast: LatLng(startPosition.latitude, destinationPosition.longitude)
-          );
+              southwest:
+                  LatLng(destinationPosition.latitude, startPosition.longitude),
+              northeast: LatLng(
+                  startPosition.latitude, destinationPosition.longitude));
         } else if (startPosition.latitude < destinationPosition.latitude) {
           latLngBounds = LatLngBounds(
-            southwest: LatLng(startPosition.latitude, destinationPosition.longitude),
-            northeast: LatLng(destinationPosition.latitude, startPosition.longitude)
-          );
+              southwest:
+                  LatLng(startPosition.latitude, destinationPosition.longitude),
+              northeast: LatLng(
+                  destinationPosition.latitude, startPosition.longitude));
         } else {
           latLngBounds = LatLngBounds(
-              southwest: LatLng(destinationPosition.latitude, destinationPosition.longitude),
-              northeast: LatLng(startPosition.latitude, startPosition.longitude));
+              southwest: LatLng(
+                  destinationPosition.latitude, destinationPosition.longitude),
+              northeast:
+                  LatLng(startPosition.latitude, startPosition.longitude));
         }
 
         // accommodate the two locations within the camera view of map
         googleMapController.animateCamera(
-          CameraUpdate.newLatLngBounds(
-              latLngBounds,
-              100.0),
+          CameraUpdate.newLatLngBounds(latLngBounds, 100.0),
         );
 
         await _createPolylines(startPosition, destinationPosition);
@@ -184,6 +187,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
+
+
 
   // Creating polylines for showing the route between two places
   _createPolylines(Position start, Position destination) async {

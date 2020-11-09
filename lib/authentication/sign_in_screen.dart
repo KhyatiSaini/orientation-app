@@ -97,15 +97,15 @@ class _signInState extends State<signIn> {
                   children: [
                     Stack(
                       children: [
-                        Container(
-                            padding: EdgeInsets.only(top: 20, left: 10),
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: Icon(Icons.arrow_back,
-                                  color: Colors.white, size: 28),
-                            )),
+                        // Container(
+                        //     padding: EdgeInsets.only(top: 20, left: 10),
+                        //     child: IconButton(
+                        //       onPressed: () {
+                        //         Navigator.of(context).pop();
+                        //       },
+                        //       icon: Icon(Icons.arrow_back,
+                        //           color: Colors.white, size: 28),
+                        //     )),
                         SizedBox(height: 20),
                         Container(
                           alignment: Alignment.topLeft,

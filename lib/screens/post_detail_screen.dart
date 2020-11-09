@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:orientation_app/classes/posts.dart';
 import 'package:orientation_app/utilities/map.dart';
 import '../utilities/colors.dart';
+
 class PostDetailScreen extends StatefulWidget {
   Post post;
 
@@ -16,15 +17,32 @@ class PostDetailScreen extends StatefulWidget {
   _PostDetailScreenState createState() => _PostDetailScreenState();
 }
 
-
 class _PostDetailScreenState extends State<PostDetailScreen> {
   String address = '';
+
+  String getTime(DateTime date) {
+    date = date.add(new Duration(minutes: 30, hours: 5));
+    var hour, minute, stamp;
+    print(date.toString());
+    if (date.hour >= 12) {
+      hour = (date.hour - 12).toString();
+      stamp = "pm";
+    } else {
+      hour = date.hour.toString();
+      stamp = "am";
+    }
+    minute = date.minute.toString();
+    if (minute.length == 1) {
+      minute = "0" + minute;
+    }
+
+    return hour + ":" + minute + " " + stamp;
+  }
 
   @override
   Widget build(BuildContext context) {
     String UserIcon() {
       List<String> name = widget.post.userName.split(" ");
-      print(name);
       String a = "";
       for (String n in name) {
         a = a + n[0];
@@ -33,8 +51,8 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
       if (a == "") {
         return "USER";
       }
-      if(a.length >2){
-        return a.substring(0,2);
+      if (a.length > 2) {
+        return a.substring(0, 2);
       }
       return a;
     }
@@ -69,7 +87,15 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                     ),
                   ),
                   title: Text(widget.post.userName),
-                  subtitle: Text(dateTime.toString()),
+                  subtitle: Text(
+                      dateTime.day.toString() +
+                          '/' +
+                          dateTime.month.toString() +
+                          '/' +
+                          dateTime.year.toString() +
+                          '  ' +
+                          getTime(dateTime),
+                      style: TextStyle(color: Colors.black87)),
                 )),
               ),
               Padding(
@@ -131,8 +157,13 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.all(18),
                   child: Container(
-                    child: Text("Location  : " + address),
-                  ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.grey[300]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Location : " + address),
+                      )),
                 )
             ],
           ),
@@ -149,7 +180,6 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   void locationAddress() async {
     String result = await LocationHelper.getPlaceAddress(
         widget.post.location.latitude, widget.post.location.longitude);
-    print(result);
     setState(() {
       address = result;
     });

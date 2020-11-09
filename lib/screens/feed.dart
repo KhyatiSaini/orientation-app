@@ -129,7 +129,7 @@ class _UserPostsFeedState extends State<UserPostsFeed>
                           child: CachedNetworkImage(
                             imageUrl: post.imageUrl,
                             placeholder: (context, url) => Container(
-                                height: 400,
+                                height: 300,
                                 child: Center(
                                     child: SpinKitCircle(
                                   color: Colors.blue,
