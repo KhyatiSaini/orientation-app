@@ -88,9 +88,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
   Future<bool> _calculateDistance() async {
     Location location = new Location();
     try {
-      if (_startingAddress == null && _destinationAddress == null)
-        return false;
-
       if (_startingAddress != null && _destinationAddress != null) {
         Position startPosition = await location.getPosition(_startingAddress);
         Position destinationPosition =
@@ -257,7 +254,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     ),
                     Container(
                       alignment: Alignment.bottomRight,
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.only(right: 10, bottom: 60),
                       child: ClipOval(
                           child: Material(
                         color: Colors.blue,
@@ -444,7 +441,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                                 ),
                                 SizedBox(height: 10),
                                 RaisedButton(
-                                  onPressed: (_startingAddress == '' && _destinationAddress == '') ?
+                                  onPressed: ((_startingAddress == '' && _destinationAddress == '') || (_startingAddress == null && _destinationAddress == null)) ?
                                   () => Fluttertoast.showToast(
                                       msg: 'Please enter starting and destination address',
                                       toastLength: Toast.LENGTH_SHORT,

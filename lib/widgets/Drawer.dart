@@ -48,113 +48,114 @@ class _AppDrawerState extends State<AppDrawer> {
 
     return Drawer(
         child: ListView(children: [
-      UserAccountsDrawerHeader(
-        accountName: Text(widget.username),
-        accountEmail: Text(widget.email),
-        currentAccountPicture: CircleAvatar(
-          backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
-              ? Colors.blue
-              : Colors.white,
-          child: Text(
-            UserIcon(),
-            style: TextStyle(fontSize: 40.0),
+          UserAccountsDrawerHeader(
+            accountName: Text(widget.username),
+            accountEmail: Text(widget.email),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
+                ? Colors.blue
+                : Colors.white,
+              child: Text(
+                UserIcon(),
+                style: TextStyle(fontSize: 40.0),
+              ),
+            ),
           ),
-        ),
-      ),
-      ListTile(
-        onTap: () {
-          Navigator.pushNamed(context, ClubsScreen.route);
-        },
-        leading: CircleAvatar(child: Icon(Icons.local_activity)),
-        title: Text(
-          "Clubs",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {
-          Navigator.pushNamed(context, SocietyScreen.route);
-        },
-        leading: CircleAvatar(child: Icon(Icons.group)),
-        title: Text(
-          "Societies",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {
-          Navigator.pushNamed(context, SportsScreen.route);
-        },
-        leading: CircleAvatar(child: Icon(Icons.golf_course)),
-        title: Text(
-          "Sports",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {
-          Navigator.pushNamed(context, HostelsList.route);
-        },
-        leading: CircleAvatar(child: Icon(Icons.apartment)),
-        title: Text(
-          "Hostels",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {
-          Navigator.pushNamed(context, PlacesToEatScreen.route);
-        },
-        leading: CircleAvatar(child: Icon(Icons.fastfood)),
-        title: Text(
-          "Places to Eat",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-        onTap: () {
-          Navigator.pushNamed(context, PlacesToVisitScreen.route);
-        },
-        leading: CircleAvatar(child: Icon(Icons.landscape)),
-        title: Text(
-          "Places to Visit",
-          style: style,
-        ),
-      ),
-      Divider(),
-      ListTile(
-          onTap: () {
-            Navigator.pushNamed(context, ShopScreen.route);
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, ClubsScreen.route);
           },
-          leading: CircleAvatar(child: Icon(Icons.store)),
-          title: Text(
-            "Shops",
-            style: style,
-          )),
-      Divider(),
-      ListTile(
-          onTap: () {
-            Navigator.pushNamed(context, Contributors.route);
+            leading: CircleAvatar(child: Icon(Icons.local_activity)),
+            title: Text(
+              "Clubs",
+              style: style,
+            ),
+          ),
+          Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, SocietyScreen.route);
           },
-          leading: CircleAvatar(child: Icon(Icons.supervised_user_circle)),
-          title: Text(
-            "Contributors",
-            style: style,
+            leading: CircleAvatar(child: Icon(Icons.group)),
+            title: Text(
+              "Societies",
+              style: style,
+            ),
+          ),
+          Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, SportsScreen.route);
+            },
+            leading: CircleAvatar(child: Icon(Icons.golf_course)),
+            title: Text(
+              "Sports",
+              style: style,
+            ),
+          ),
+          Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, HostelsList.route);
+            },
+            leading: CircleAvatar(child: Icon(Icons.apartment)),
+            title: Text(
+              "Hostels",
+              style: style,
+            ),
+          ),
+          Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, PlacesToEatScreen.route);
+            },
+            leading: CircleAvatar(child: Icon(Icons.fastfood)),
+            title: Text(
+              "Places to Eat",
+              style: style,
+            ),
+          ),
+          Divider(),
+          ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, PlacesToVisitScreen.route);
+          },
+            leading: CircleAvatar(child: Icon(Icons.landscape)),
+            title: Text(
+              "Places to Visit",
+              style: style,
+            ),
+          ),
+          Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, ShopScreen.route);
+            },
+              leading: CircleAvatar(child: Icon(Icons.store)),
+              title: Text(
+                "Shops",
+                style: style,
+            ),
+          ),
+          Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, Contributors.route);
+            },
+              leading: CircleAvatar(child: Icon(Icons.supervised_user_circle)),
+              title: Text(
+                "Contributors",
+                style: style,
           )),
-      Divider(),
-      ListTile(
-          onTap: () async {
-            FirebaseAuth.instance.signOut();
-            try {
-              GoogleSignIn _googleSignIn = GoogleSignIn();
-              await _googleSignIn.signOut();
+          Divider(),
+          ListTile(
+            onTap: () async {
+              FirebaseAuth.instance.signOut();
+              try {
+                GoogleSignIn _googleSignIn = GoogleSignIn();
+                await _googleSignIn.signOut();
 
-              Fluttertoast.showToast(
+                Fluttertoast.showToast(
                   msg: "Successfully Logged-Out",
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
@@ -166,12 +167,12 @@ class _AppDrawerState extends State<AppDrawer> {
               print(e);
             }
           },
-          leading: CircleAvatar(child: Icon(Icons.logout)),
-          title: Text(
-            "Logout",
-            style: style,
+              leading: CircleAvatar(child: Icon(Icons.logout)),
+              title: Text(
+                "Logout",
+                style: style,
           )),
-      Divider()
+          Divider()
     ]));
   }
 }

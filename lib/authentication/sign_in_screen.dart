@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:orientation_app/screens/home_screen.dart';
+import 'package:orientation_app/screens/welcome_screen.dart';
 import 'sign_up_screen.dart';
 
 // ignore: camel_case_types
@@ -95,18 +96,21 @@ class _signInState extends State<signIn> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Container(
+                        padding: EdgeInsets.only(left: 10),
+                        width: double.infinity,
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, WelcomeScreen.route);
+                          },
+                          icon: Icon(Icons.arrow_back,
+                              color: Colors.white, size: 28),
+                        ),
+                      color: Colors.blue,
+                    ),
                     Stack(
                       children: [
-                        Container(
-                            padding: EdgeInsets.only(top: 20, left: 10),
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: Icon(Icons.arrow_back,
-                                  color: Colors.white, size: 28),
-                            )),
-                        SizedBox(height: 20),
                         Container(
                           alignment: Alignment.topLeft,
                           width: double.infinity,

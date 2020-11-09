@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:orientation_app/screens/home_screen.dart';
+import 'package:orientation_app/screens/welcome_screen.dart';
 import 'Signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -69,7 +71,7 @@ class _SignUpPage extends State<SignUp> {
             backgroundColor: Colors.white,
             textColor: Colors.blue,
             fontSize: 16.0);
-        Navigator.of(context).pop();
+        Navigator.pushNamed(context, HomeScreen.route);
       } catch (e) {
         print(e);
         Scaffold.of(context).showSnackBar(SnackBar(
@@ -103,18 +105,21 @@ class _SignUpPage extends State<SignUp> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 10),
+                          width: double.infinity,
+                          alignment: Alignment.topLeft,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, WelcomeScreen.route);
+                            },
+                            icon: Icon(Icons.arrow_back,
+                                color: Colors.white, size: 28),
+                          ),
+                          color: Colors.blue[350],
+                        ),
                         Stack(
                           children: [
-                            Container(
-                                padding: EdgeInsets.only(top: 20, left: 10),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: Icon(Icons.arrow_back,
-                                      color: Colors.white, size: 28),
-                                )),
-                            SizedBox(height: 20),
                             Container(
                               alignment: Alignment.topLeft,
                               width: double.infinity,
@@ -149,7 +154,7 @@ class _SignUpPage extends State<SignUp> {
                                       padding:
                                           EdgeInsets.only(left: 20, top: 30),
                                       child: Text(
-                                        'Welcome to something',
+                                        'Welcome to Gaze NIT-H',
                                         style: TextStyle(
                                             color: Colors.blue,
                                             fontWeight: FontWeight.bold,
