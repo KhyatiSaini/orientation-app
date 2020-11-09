@@ -4,7 +4,7 @@ A flutter application that will be like a companion for the freshers to get to k
 ## User Authentication
 [Firebase](https://firebase.google.com/) is used for user authenication. The user can either create an account or sign-in with google to continue with the app.
 
-<img src = "https://user-images.githubusercontent.com/55757584/98590759-4aab3c00-22f5-11eb-8964-1e6225836d8f.jpg" width = "32%" height = "100%">    <img src = "https://user-images.githubusercontent.com/55757584/98591860-dd98a600-22f6-11eb-8d39-270ebd5fc511.jpg" width = "32%" height = "100%">    <img src = "https://user-images.githubusercontent.com/55757584/98592239-73cccc00-22f7-11eb-9120-0e8d87fda14a.jpg" width = "32%" height = "677px">
+<img src = "https://user-images.githubusercontent.com/55757584/98590759-4aab3c00-22f5-11eb-8964-1e6225836d8f.jpg" width = "32%" height = "650px">    <img src = "https://user-images.githubusercontent.com/55757584/98591860-dd98a600-22f6-11eb-8d39-270ebd5fc511.jpg" width = "32%" height = "650px">    <img src = "https://user-images.githubusercontent.com/55757584/98592239-73cccc00-22f7-11eb-9120-0e8d87fda14a.jpg" width = "32%" height = "650px">
 
 ## Backend - Firestore and Django
 [Firestore](https://firebase.google.com/products/firestore) and [Django application](https://github.com/spiderxm/Orientation_app_backend) is used as backend for this application.
@@ -69,7 +69,7 @@ The google maps are used in these sections, markers are added at important place
 <img src = "https://user-images.githubusercontent.com/55757584/98594763-22264080-22fb-11eb-928f-882e74f4dda8.jpg" width = "32%">    <img src = "https://user-images.githubusercontent.com/55757584/98595042-76c9bb80-22fb-11eb-8fe9-e83283488228.jpg" width = "32%">    <img src = "https://user-images.githubusercontent.com/55757584/98595195-abd60e00-22fb-11eb-8a65-bbf9e180c2b4.jpg" width = "32%">
 
 ##
-<img src = "https://user-images.githubusercontent.com/55757584/98595444-01121f80-22fc-11eb-9a19-040548eb3fd5.jpg" width = "32%" height = "678.5px">    <img src = "https://user-images.githubusercontent.com/55757584/98595740-60702f80-22fc-11eb-957e-da452aca4ed5.jpg" width = "32%">    <img src = "https://user-images.githubusercontent.com/55757584/98595853-931a2800-22fc-11eb-8db3-546a227adcf3.jpg" width = "32%">
+<img src = "https://user-images.githubusercontent.com/55757584/98595444-01121f80-22fc-11eb-9a19-040548eb3fd5.jpg" width = "32%" height = "678.5px">    <img src = "https://user-images.githubusercontent.com/55757584/98595740-60702f80-22fc-11eb-957e-da452aca4ed5.jpg" width = "32%" height = "678.5px">    <img src = "https://user-images.githubusercontent.com/55757584/98595853-931a2800-22fc-11eb-8db3-546a227adcf3.jpg" width = "32%" height = "678.5px">
 
 ##
 <img src = "https://user-images.githubusercontent.com/55757584/98596441-73cfca80-22fd-11eb-9186-b32b056f6691.jpg" width = "32%">    <img src = "https://user-images.githubusercontent.com/55757584/98596020-d70d2d00-22fc-11eb-90d7-81fc9a69ea14.jpg" width = "32%">    <img src = "https://user-images.githubusercontent.com/55757584/98596513-8cd87b80-22fd-11eb-9568-a2abdfbfed2e.jpg" width = "32%">
